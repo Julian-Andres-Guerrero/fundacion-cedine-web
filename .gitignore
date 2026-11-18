@@ -1,1 +1,2 @@
 -e ".DS_Store\nThumbs.db\n.vscode/\n*.log" 
+"assets/img/*.pdf" 
