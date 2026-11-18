@@ -1,36 +1,50 @@
 const translations = {
   es: {
+    // Navegación Global
     nav_home: "Inicio",
     nav_about: "Nuestra Labor",
     nav_programs: "Terapias e Inclusión",
-    nav_transparency: "Transparencia y Contacto",
+    nav_gallery: "Jornadas",
+    nav_transparency: "Transparencia",
     nav_donate: "Apoyar Ahora",
+
+    // Index - Hero
     hero_badge: "Bogotá, Colombia • Educación Especial, Inclusión y Terapia",
     hero_title: "Cada niño avanza a su ritmo. Nosotros caminamos con él.",
     hero_desc: "Acompañamos el desarrollo pedagógico y terapéutico de niños y jóvenes con necesidades educativas y discapacidad en zonas vulnerables de Colombia.",
     hero_motto: "“Cuestión de actitud”",
     hero_cta_primary: "Quiero Apoyar",
-    hero_cta_secondary: "Explorar Terapias",
+    hero_cta_secondary: "Ver Jornadas en Acción",
     hero_card_sub: "Centro de Diagnóstico de Necesidades Educativas",
+
+    // Index - Tarjetas de Exploración
     home_explore_title: "Descubre el corazón de CEDINE",
-    home_explore_sub: "Explora nuestra historia, nuestras terapias especializadas o cómo sumarte como aliado.",
+    home_explore_sub: "Explora nuestra historia, nuestras terapias especializadas, nuestras jornadas reales o cómo sumarte como aliado.",
     card_1_tag: "Identidad y Propósito",
     card_1_title: "Nuestra Labor",
-    card_1_desc: "Conoce qué significa nuestro símbolo, nuestra metodología de inclusión y el respaldo legal de la fundación en Bogotá.",
+    card_1_desc: "Conoce qué significa nuestro símbolo, nuestra metodología de inclusión y el respaldo legal en Bogotá.",
     card_1_link: "Conocer historia",
     card_2_tag: "4 Líneas Terapéuticas",
     card_2_title: "Terapias e Inclusión",
     card_2_desc: "Diagnóstico pedagógico, zooterapia asistida con perros, terapia motriz al aire libre y terapia acuática.",
     card_2_link: "Ver programas",
+    card_gal_tag: "Evidencia Real",
+    card_gal_title: "Jornadas en Acción",
+    card_gal_desc: "Recorre nuestra galería interactiva de sesiones reales con niños, familias y perros de terapia.",
+    card_gal_link: "Abrir galería",
     card_3_tag: "Súmate al Cambio",
     card_3_title: "Apoyar y Contactar",
     card_3_desc: "Canales oficiales de donación, voluntariado, alianzas y contacto directo por WhatsApp con nuestro equipo.",
     card_3_link: "Cómo ayudar",
+
+    // Index - Impacto
     impact_title: "Caminando juntos por la inclusión",
     stat_1: "% Compromiso Social",
     stat_2: "Líneas Terapéuticas",
     stat_3: "Años de Trayectoria",
     stat_4: "+ Familias Acompañadas",
+
+    // Nosotros (nosotros.html)
     about_tag: "Sobre Nosotros",
     about_title: "Potenciamos las capacidades de nuestros niños con amor y rigor profesional",
     about_hero_sub: "Una entidad sin ánimo de lucro en Bogotá dedicada al diagnóstico pedagógico, la inclusión y el desarrollo terapéutico integral.",
@@ -54,6 +68,8 @@ const translations = {
     pillar_4_t: "Incluir",
     pillar_4_d: "Facilitamos su integración plena en el entorno escolar, familiar y comunitario.",
     about_next_btn: "Conocer Nuestras 4 Terapias →",
+
+    // Programas (programas.html)
     prog_tag: "Nuestras Líneas de Acción",
     prog_title: "Intervención integral para su desarrollo y bienestar",
     prog_subtitle: "Combinamos el acompañamiento pedagógico especializado con terapias asistidas que estimulan la confianza, el movimiento y el aprendizaje.",
@@ -84,6 +100,31 @@ const translations = {
     prog_4_b3: "• Autonomía y seguridad en el agua",
     prog_cta_title: "Ayúdanos a llevar estas terapias a más niños en Bogotá",
     prog_cta_sub: "Cada sesión transforma el día a día de una familia. Conoce cómo puedes patrocinar una terapia o vincular tu empresa.",
+
+    // Galería / Jornadas (galeria.html)
+    gal_tag: "Evidencia Real • Bogotá, Colombia",
+    gal_title: "Nuestras Jornadas en Acción",
+    gal_sub: "Cada sonrisa, cada avance motriz y cada encuentro con nuestros perros de terapia es posible gracias al trabajo en equipo con las familias.",
+    gal_carousel_badge: "Galería Interactiva",
+    gal_photos_title: "Momentos de Nuestras Actividades",
+    gal_swipe_hint: "Desliza con el dedo o toca una foto para ampliar",
+    gal_vid_badge: "Experiencias en Video",
+    gal_videos_title: "Cápsulas de Nuestras Sesiones",
+    gal_videos_sub: "Desliza horizontalmente para explorar nuestras jornadas terapéuticas y comunitarias.",
+    gal_vid_soon: "Próximamente en línea",
+    slide_cap_1: "Acompañamiento pedagógico y cercanía con cada niño",
+    slide_cap_2: "Zooterapia: vínculos de confianza y alegría",
+    slide_cap_3: "Estimulación sensorial y juego guiado",
+    slide_cap_4: "Trabajo en equipo con familias y cuidadores",
+    slide_cap_5: "Actividades motrices al aire libre en Bogotá",
+    slide_cap_6: "Aprendizaje significativo a su propio ritmo",
+    slide_cap_7: "Desarrollo de autonomía y habilidades sociales",
+    slide_cap_8: "Encuentros comunitarios de inclusión",
+    slide_cap_9: "Terapia asistida llena de afecto y respeto",
+    slide_cap_10: "Construyendo oportunidades sin etiquetas",
+    slide_cap_11: "Cuestión de actitud: cada logro cuenta",
+
+    // Donar y Transparencia (donar.html)
     donate_tag: "Súmate a Nuestra Misión",
     donate_title: "Tu apoyo hace posible cada terapia y diagnóstico",
     donate_hero_sub: "Cada aporte económico, alianza institucional o voluntariado se traduce directamente en bienestar para nuestros niños en Bogotá.",
@@ -99,20 +140,26 @@ const translations = {
     donate_whatsapp: "Contactar por WhatsApp"
   },
   en: {
+    // Global Navigation
     nav_home: "Home",
     nav_about: "Our Mission",
     nav_programs: "Therapies & Inclusion",
-    nav_transparency: "Transparency & Contact",
+    nav_gallery: "Our Work",
+    nav_transparency: "Transparency",
     nav_donate: "Support Now",
+
+    // Index - Hero
     hero_badge: "Bogotá, Colombia • Special Education, Inclusion & Therapy",
     hero_title: "Every child moves at their own pace. We walk beside them.",
     hero_desc: "We support the pedagogical and therapeutic development of children and youth with special educational needs and disabilities in vulnerable communities across Colombia.",
     hero_motto: "“A matter of attitude”",
     hero_cta_primary: "Support Now",
-    hero_cta_secondary: "Explore Therapies",
+    hero_cta_secondary: "See Our Work in Action",
     hero_card_sub: "Center for Diagnosis of Educational Needs",
+
+    // Index - Exploration Cards
     home_explore_title: "Discover the heart of CEDINE",
-    home_explore_sub: "Explore our story, specialized therapies, or how to join us as a partner.",
+    home_explore_sub: "Explore our story, specialized therapies, real community sessions, or how to join us as a partner.",
     card_1_tag: "Identity & Purpose",
     card_1_title: "Our Mission",
     card_1_desc: "Learn the meaning behind our emblem, our inclusive methodology, and our legal standing in Bogotá.",
@@ -121,15 +168,23 @@ const translations = {
     card_2_title: "Therapies & Inclusion",
     card_2_desc: "Pedagogical diagnosis, canine-assisted therapy, outdoor motor therapy, and aquatic therapy.",
     card_2_link: "View programs",
+    card_gal_tag: "Real Impact",
+    card_gal_title: "Programs in Action",
+    card_gal_desc: "Browse our interactive gallery of real sessions with children, families, and therapy dogs.",
+    card_gal_link: "Open gallery",
     card_3_tag: "Join the Change",
     card_3_title: "Support & Contact",
     card_3_desc: "Official donation channels, volunteering, corporate partnerships, and direct WhatsApp contact.",
     card_3_link: "How to help",
+
+    // Index - Impact
     impact_title: "Walking together toward true inclusion",
     stat_1: "% Social Commitment",
     stat_2: "Therapeutic Programs",
     stat_3: "Years of Experience",
     stat_4: "+ Families Supported",
+
+    // About Us (nosotros.html)
     about_tag: "About Us",
     about_title: "Empowering our children's abilities with love and professional excellence",
     about_hero_sub: "A non-profit organization in Bogotá dedicated to pedagogical diagnostics, inclusion, and holistic therapeutic development.",
@@ -153,6 +208,8 @@ const translations = {
     pillar_4_t: "Include",
     pillar_4_d: "We foster full integration within school, family, and community environments.",
     about_next_btn: "Explore Our 4 Therapies →",
+
+    // Programs (programas.html)
     prog_tag: "Our Programs",
     prog_title: "Comprehensive care for growth and well-being",
     prog_subtitle: "We combine specialized pedagogical guidance with assisted therapies that build confidence, mobility, and joy in learning.",
@@ -183,6 +240,31 @@ const translations = {
     prog_4_b3: "• Autonomy and confidence in water",
     prog_cta_title: "Help us bring these therapies to more children in Bogotá",
     prog_cta_sub: "Every session transforms a family's daily life. Learn how you can sponsor a therapy session or partner with us.",
+
+    // Gallery / Work in Action (galeria.html)
+    gal_tag: "Real Impact • Bogotá, Colombia",
+    gal_title: "Our Programs in Action",
+    gal_sub: "Every smile, motor milestone, and session with our therapy dogs is made possible through teamwork with families.",
+    gal_carousel_badge: "Interactive Gallery",
+    gal_photos_title: "Moments from Our Activities",
+    gal_swipe_hint: "Swipe with your finger or tap any photo to enlarge",
+    gal_vid_badge: "Video Stories",
+    gal_videos_title: "Session Highlights",
+    gal_videos_sub: "Swipe horizontally to explore our therapeutic and community sessions.",
+    gal_vid_soon: "Video coming soon",
+    slide_cap_1: "Pedagogical support and warmth for every child",
+    slide_cap_2: "Canine-assisted therapy: bonds of trust and joy",
+    slide_cap_3: "Sensory stimulation and guided play",
+    slide_cap_4: "Teamwork alongside families and caregivers",
+    slide_cap_5: "Outdoor motor activities in Bogotá",
+    slide_cap_6: "Meaningful learning at each child's own pace",
+    slide_cap_7: "Building autonomy and social skills",
+    slide_cap_8: "Inclusive community gatherings",
+    slide_cap_9: "Assisted therapy filled with care and respect",
+    slide_cap_10: "Creating opportunities beyond labels",
+    slide_cap_11: "A matter of attitude: every milestone counts",
+
+    // Donate & Transparency (donar.html)
     donate_tag: "Join Our Mission",
     donate_title: "Your support makes every therapy session possible",
     donate_hero_sub: "Every financial contribution, corporate partnership, or volunteer hour directly supports our children in Bogotá.",
