@@ -5,13 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fundación CEDINE | Cuestión de Actitud • Bogotá, Colombia</title>
   <meta name="description" content="Fundación Centro de Diagnóstico de Necesidades Educativas CEDINE (NIT 900.773.102-4). Educación especial, inclusión, zooterapia y desarrollo integral en Bogotá." />
-
-  <!-- SEO, Palabras Clave y Canonical -->
   <meta name="keywords" content="Fundacion CEDINE, CEDINE, Centro de Diagnostico de Necesidades Educativas, fundacion en Bogota, educacion especial Bogota, inclusion educativa Colombia, zooterapia Bogota, terapia asistida con perros, terapia acuatica Bogota, terapia motriz al aire libre, discapacidad infantil Colombia, donaciones fundacion Colombia, Cuestion de actitud, NIT 900773102-4" />
   <meta name="author" content="Fundación Centro de Diagnóstico de Necesidades Educativas CEDINE" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://fundacioncedine.org/" />
-
   <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
 
   <!-- Open Graph -->
@@ -93,52 +90,7 @@
 </head>
 <body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
 
-  <!-- ==================== NAVBAR MULTIPÁGINA ==================== -->
-  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
-      <a href="index.html" class="py-1 focus:outline-none" aria-label="Inicio Fundación CEDINE">
-        <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
-      </a>
-
-      <!-- Menú Desktop -->
-      <nav class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-cedine-blue">
-        <a href="index.html" class="text-cedine-orange font-semibold" data-i18n="nav_home">Inicio</a>
-        <a href="nosotros.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_about">Nuestra Labor</a>
-        <a href="programas.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_programs">Terapias e Inclusión</a>
-        <a href="galeria.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_gallery">Jornadas</a>
-        <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia</a>
-      </nav>
-
-      <!-- Acciones -->
-      <div class="hidden lg:flex items-center gap-4">
-        <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
-          <span id="current-lang">ES</span>
-          <svg class="w-4 h-4 text-cedine-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
-        </button>
-
-        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md shadow-cedine-orange/30 transition-all transform hover:-translate-y-0.5" data-i18n="nav_donate">
-          Apoyar Ahora
-        </a>
-      </div>
-
-      <!-- Controles Móviles -->
-      <div class="flex items-center gap-3 lg:hidden">
-        <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
-        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100" aria-label="Abrir menú">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Menú Desplegable Móvil -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
-      <a href="index.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
-      <a href="nosotros.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
-      <a href="programas.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
-      <a href="galeria.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_gallery">Jornadas</a>
-      <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
-    </div>
-  </header>
+  <div id="global-header"></div>
 
   <!-- ==================== HERO SECTION PARALLAX ==================== -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
@@ -169,8 +121,8 @@
         </p>
 
         <div data-aos="fade-up" data-aos-delay="300" class="flex flex-wrap items-center gap-4">
-          <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base sm:text-lg px-8 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2" data-i18n="hero_cta_primary">
-            <span>Quiero Apoyar</span>
+          <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base sm:text-lg px-8 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+            <span data-i18n="hero_cta_primary">Quiero Apoyar</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
           </a>
 
@@ -193,7 +145,7 @@
     </div>
   </section>
 
-  <!-- ==================== ACCESOS RÁPIDOS A CADA SECCIÓN (SIN SATURAR) ==================== -->
+  <!-- ==================== ACCESOS RÁPIDOS ==================== -->
   <section class="py-20 px-6 bg-white">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
@@ -206,7 +158,6 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Card 1 -> nosotros.html -->
         <a href="nosotros.html" data-aos="fade-up" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-cedine-blue/10 text-cedine-blue text-xs font-display font-semibold mb-4" data-i18n="card_1_tag">Identidad y Propósito</span>
@@ -220,7 +171,6 @@
           </span>
         </a>
 
-        <!-- Card 2 -> programas.html -->
         <a href="programas.html" data-aos="fade-up" data-aos-delay="100" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-cedine-green/20 text-cedine-blue text-xs font-display font-semibold mb-4" data-i18n="card_2_tag">4 Líneas Terapéuticas</span>
@@ -234,13 +184,12 @@
           </span>
         </a>
 
-        <!-- Card 3 -> galeria.html -->
         <a href="galeria.html" data-aos="fade-up" data-aos-delay="150" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange text-xs font-display font-semibold mb-4" data-i18n="card_gal_tag">Evidencia Real</span>
             <h3 class="font-display font-bold text-xl text-cedine-blue mb-3 group-hover:text-cedine-orange transition-colors" data-i18n="card_gal_title">Jornadas en Acción</h3>
             <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="card_gal_desc">
-              Recorre nuestro carrusel fotográfico y audiovisual de sesiones reales con niños, familias y perros de terapia.
+              Recorre nuestra galería interactiva de sesiones reales con niños, familias y perros de terapia.
             </p>
           </div>
           <span class="font-display font-semibold text-sm text-cedine-blue flex items-center gap-2">
@@ -248,7 +197,6 @@
           </span>
         </a>
 
-        <!-- Card 4 -> donar.html -->
         <a href="donar.html" data-aos="fade-up" data-aos-delay="200" class="group bg-cedine-blue text-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
           <div>
             <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange text-white text-xs font-display font-semibold mb-4" data-i18n="card_3_tag">Súmate al Cambio</span>
@@ -296,29 +244,9 @@
     </div>
   </section>
 
-  <!-- ==================== FOOTER COMPACTO ==================== -->
-  <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
-      <div>
-        <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
-        <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
-      </div>
+  <div id="global-footer"></div>
 
-      <div class="flex flex-wrap gap-6 text-sm text-blue-100">
-        <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
-        <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
-        <a href="programas.html" class="hover:text-cedine-orange transition" data-i18n="nav_programs">Terapias e Inclusión</a>
-        <a href="galeria.html" class="hover:text-cedine-orange transition" data-i18n="nav_gallery">Jornadas</a>
-        <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
-      <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
-      <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
-    </div>
-  </footer>
-
+  <script src="assets/js/layout.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>

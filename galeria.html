@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- SwiperJS CSS para Carrusel Táctil Moderno -->
+  <!-- SwiperJS CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -43,7 +43,6 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
   <style>
-    /* Estilos personalizados para Swiper CEDINE */
     .cedine-swiper .swiper-pagination-bullet {
       width: 10px;
       height: 10px;
@@ -67,47 +66,7 @@
 </head>
 <body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
 
-  <!-- ==================== NAVBAR ==================== -->
-  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
-      <a href="index.html" class="py-1 focus:outline-none">
-        <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
-      </a>
-
-      <nav class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-cedine-blue">
-        <a href="index.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_home">Inicio</a>
-        <a href="nosotros.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_about">Nuestra Labor</a>
-        <a href="programas.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_programs">Terapias e Inclusión</a>
-        <a href="galeria.html" class="text-cedine-orange font-semibold" data-i18n="nav_gallery">Jornadas</a>
-        <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia</a>
-      </nav>
-
-      <div class="hidden lg:flex items-center gap-4">
-        <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
-          <span id="current-lang">ES</span>
-          <svg class="w-4 h-4 text-cedine-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
-        </button>
-        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md transition" data-i18n="nav_donate">
-          Apoyar Ahora
-        </a>
-      </div>
-
-      <div class="flex items-center gap-3 lg:hidden">
-        <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
-        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100">
-          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
-      <a href="index.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
-      <a href="nosotros.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
-      <a href="programas.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
-      <a href="galeria.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_gallery">Jornadas</a>
-      <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
-    </div>
-  </header>
+  <div id="global-header"></div>
 
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
@@ -133,7 +92,6 @@
         <p class="text-slate-500 text-xs sm:text-sm mt-1" data-i18n="gal_swipe_hint">Desliza con el dedo o toca una foto para ampliar</p>
       </div>
 
-      <!-- Flechas Desktop -->
       <div class="hidden sm:flex items-center gap-3">
         <button class="photo-prev w-11 h-11 rounded-full bg-cedine-cream border border-slate-200 text-cedine-blue hover:bg-cedine-blue hover:text-white flex items-center justify-center shadow-sm transition">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
@@ -144,10 +102,8 @@
       </div>
     </div>
 
-    <!-- Swiper Coverflow / Peek -->
     <div class="swiper cedine-swiper photo-swiper pb-12 px-4 sm:px-0">
       <div class="swiper-wrapper">
-        <!-- Slide 1 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-01.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-01.jpg" alt="Jornada CEDINE 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -158,7 +114,6 @@
           </div>
         </div>
 
-        <!-- Slide 2 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-02.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-02.jpg" alt="Jornada CEDINE 2" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -169,7 +124,6 @@
           </div>
         </div>
 
-        <!-- Slide 3 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-03.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-03.jpg" alt="Jornada CEDINE 3" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -180,7 +134,6 @@
           </div>
         </div>
 
-        <!-- Slide 4 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-04.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-04.jpg" alt="Jornada CEDINE 4" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -191,7 +144,6 @@
           </div>
         </div>
 
-        <!-- Slide 5 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-05.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-05.jpg" alt="Jornada CEDINE 5" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -202,7 +154,6 @@
           </div>
         </div>
 
-        <!-- Slide 6 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-06.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-06.jpg" alt="Jornada CEDINE 6" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -213,7 +164,6 @@
           </div>
         </div>
 
-        <!-- Slide 7 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-07.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-07.jpg" alt="Jornada CEDINE 7" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -224,7 +174,6 @@
           </div>
         </div>
 
-        <!-- Slide 8 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-08.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-08.jpg" alt="Jornada CEDINE 8" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -235,7 +184,6 @@
           </div>
         </div>
 
-        <!-- Slide 9 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-09.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-09.jpg" alt="Jornada CEDINE 9" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -246,7 +194,6 @@
           </div>
         </div>
 
-        <!-- Slide 10 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-10.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-10.jpg" alt="Jornada CEDINE 10" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -257,7 +204,6 @@
           </div>
         </div>
 
-        <!-- Slide 11 -->
         <div class="swiper-slide cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-11.jpg')">
           <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/5] sm:aspect-[4/3] bg-cedine-cream group">
             <img src="assets/media/fotos/jornada-11.jpg" alt="Jornada CEDINE 11" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -269,12 +215,11 @@
         </div>
       </div>
 
-      <!-- Puntos indicadores dinámicos -->
       <div class="swiper-pagination"></div>
     </div>
   </section>
 
-  <!-- ==================== CARRUSEL DE VIDEOS (PREPARADO PARA SUBIR VIDEOS) ==================== -->
+  <!-- ==================== CARRUSEL DE VIDEOS ==================== -->
   <section class="py-16 bg-cedine-cream border-t border-slate-200/60 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div>
@@ -297,10 +242,8 @@
       </div>
     </div>
 
-    <!-- Swiper Reels / Stories para Celular y Desktop -->
     <div class="swiper cedine-swiper video-swiper pb-12 px-6 max-w-7xl mx-auto">
       <div class="swiper-wrapper">
-        <!-- Cada tarjeta lista con poster real y ruta preparada para actividad-01..08.mp4 -->
         <div class="swiper-slide">
           <div class="bg-white rounded-3xl p-2.5 shadow-md border border-slate-100">
             <video controls preload="none" poster="assets/media/fotos/jornada-01.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-cedine-blue">
@@ -362,37 +305,17 @@
     </div>
   </section>
 
-  <!-- Modal Lightbox para ampliar fotos -->
+  <!-- Modal Lightbox -->
   <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm items-center justify-center p-4">
     <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-cedine-orange">&times;</button>
     <img id="lightbox-img" src="" alt="Vista ampliada" class="max-h-[88vh] max-w-[92vw] rounded-2xl shadow-2xl object-contain" />
   </div>
 
-  <!-- ==================== FOOTER COMPACTO ==================== -->
-  <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
-      <div>
-        <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
-        <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
-      </div>
-      <div class="flex flex-wrap gap-6 text-sm text-blue-100">
-        <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
-        <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
-        <a href="programas.html" class="hover:text-cedine-orange transition" data-i18n="nav_programs">Terapias e Inclusión</a>
-        <a href="galeria.html" class="hover:text-cedine-orange transition" data-i18n="nav_gallery">Jornadas</a>
-        <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
-      </div>
-    </div>
-    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
-      <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
-      <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
-    </div>
-  </footer>
+  <div id="global-footer"></div>
 
-  <!-- SwiperJS Script -->
+  <script src="assets/js/layout.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    // Carrusel de Fotos con efecto Coverflow / Peek en móvil y escritorio
     new Swiper('.photo-swiper', {
       effect: 'coverflow',
       grabCursor: true,
@@ -412,48 +335,23 @@
         slideShadows: false,
       },
       breakpoints: {
-        640: {
-          slidesPerView: 1.6,
-          spaceBetween: 24,
-        },
-        1024: {
-          slidesPerView: 2.3,
-          spaceBetween: 30,
-        }
+        640: { slidesPerView: 1.6, spaceBetween: 24 },
+        1024: { slidesPerView: 2.3, spaceBetween: 30 }
       },
-      pagination: {
-        el: '.photo-swiper .swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.photo-next',
-        prevEl: '.photo-prev',
-      },
+      pagination: { el: '.photo-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.photo-next', prevEl: '.photo-prev' },
     });
 
-    // Carrusel de Videos estilo Stories / Reels
     new Swiper('.video-swiper', {
       grabCursor: true,
       slidesPerView: 1.35,
       spaceBetween: 16,
       breakpoints: {
-        640: {
-          slidesPerView: 2.5,
-          spaceBetween: 20,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 24,
-        }
+        640: { slidesPerView: 2.5, spaceBetween: 20 },
+        1024: { slidesPerView: 4, spaceBetween: 24 }
       },
-      pagination: {
-        el: '.video-swiper .swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.vid-next',
-        prevEl: '.vid-prev',
-      },
+      pagination: { el: '.video-swiper .swiper-pagination', clickable: true },
+      navigation: { nextEl: '.vid-next', prevEl: '.vid-prev' },
     });
 
     function openLightbox(src) {
