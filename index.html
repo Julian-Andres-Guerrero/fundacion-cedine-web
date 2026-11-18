@@ -3,13 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jornadas y Galería | Fundación CEDINE • Bogotá, Colombia</title>
-  <meta name="description" content="Conoce las jornadas reales, actividades terapéuticas y el impacto de la Fundación CEDINE en Bogotá, Colombia." />
-<!-- SEO, Palabras Clave y Canonical -->
+  <title>Fundación CEDINE | Cuestión de Actitud • Bogotá, Colombia</title>
+  <meta name="description" content="Fundación Centro de Diagnóstico de Necesidades Educativas CEDINE (NIT 900.773.102-4). Educación especial, inclusión, zooterapia y desarrollo integral en Bogotá." />
+
+  <!-- SEO, Palabras Clave y Canonical -->
   <meta name="keywords" content="Fundacion CEDINE, CEDINE, Centro de Diagnostico de Necesidades Educativas, fundacion en Bogota, educacion especial Bogota, inclusion educativa Colombia, zooterapia Bogota, terapia asistida con perros, terapia acuatica Bogota, terapia motriz al aire libre, discapacidad infantil Colombia, donaciones fundacion Colombia, Cuestion de actitud, NIT 900773102-4" />
   <meta name="author" content="Fundación Centro de Diagnóstico de Necesidades Educativas CEDINE" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://fundacioncedine.org/" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fundacioncedine.org/" />
+  <meta property="og:title" content="Fundación CEDINE | Cuestión de Actitud" />
+  <meta property="og:description" content="Cada niño avanza a su ritmo. Nosotros caminamos con él." />
+  <meta property="og:image" content="https://fundacioncedine.org/assets/media/fotos/jornada-01.jpg" />
 
   <!-- Datos Estructurados Oficiales para Google (Schema.org NGO) -->
   <script type="application/ld+json">
@@ -48,12 +58,13 @@
     ]
   }
   </script>
-  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
 
+  <!-- Google Fonts Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -82,171 +93,208 @@
 </head>
 <body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
 
-  <!-- ==================== NAVBAR ==================== -->
+  <!-- ==================== NAVBAR MULTIPÁGINA ==================== -->
   <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
-      <a href="index.html" class="py-1 focus:outline-none">
+      <a href="index.html" class="py-1 focus:outline-none" aria-label="Inicio Fundación CEDINE">
         <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
       </a>
 
+      <!-- Menú Desktop -->
       <nav class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-cedine-blue">
-        <a href="index.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_home">Inicio</a>
+        <a href="index.html" class="text-cedine-orange font-semibold" data-i18n="nav_home">Inicio</a>
         <a href="nosotros.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_about">Nuestra Labor</a>
         <a href="programas.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_programs">Terapias e Inclusión</a>
-        <a href="galeria.html" class="text-cedine-orange font-semibold" data-i18n="nav_gallery">Jornadas</a>
+        <a href="galeria.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_gallery">Jornadas</a>
         <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia</a>
       </nav>
 
+      <!-- Acciones -->
       <div class="hidden lg:flex items-center gap-4">
         <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
           <span id="current-lang">ES</span>
+          <svg class="w-4 h-4 text-cedine-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
         </button>
-        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md transition" data-i18n="nav_donate">
+
+        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md shadow-cedine-orange/30 transition-all transform hover:-translate-y-0.5" data-i18n="nav_donate">
           Apoyar Ahora
         </a>
       </div>
 
+      <!-- Controles Móviles -->
       <div class="flex items-center gap-3 lg:hidden">
         <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
-        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100">
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100" aria-label="Abrir menú">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
       </div>
     </div>
 
+    <!-- Menú Desplegable Móvil -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
-      <a href="index.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
+      <a href="index.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
       <a href="nosotros.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
       <a href="programas.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
-      <a href="galeria.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_gallery">Jornadas</a>
+      <a href="galeria.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_gallery">Jornadas</a>
       <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
     </div>
   </header>
 
-  <!-- ==================== CABECERA ==================== -->
-  <section class="pt-36 pb-16 px-6 bg-cedine-blue text-white">
-    <div class="max-w-5xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="gal_tag">
-        Evidencia Real • Bogotá, Colombia
-      </span>
-      <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5" data-i18n="gal_title">
-        Nuestras Jornadas en Acción
-      </h1>
-      <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="gal_sub">
-        Cada sonrisa, cada avance motriz y cada encuentro con nuestros perros de terapia es posible gracias al trabajo en equipo con las familias.
-      </p>
+  <!-- ==================== HERO SECTION PARALLAX ==================== -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
+    <div class="parallax-bg absolute inset-0 z-0 bg-cover bg-center" data-speed="0.35" style="background-image: url('assets/media/fotos/jornada-01.jpg');">
+      <div class="absolute inset-0 bg-gradient-to-r from-cedine-blue/90 via-cedine-blue/80 to-cedine-blue/65"></div>
+    </div>
+
+    <div class="parallax-layer hidden md:block absolute -right-24 top-28 w-96 h-96 rounded-full border-[18px] border-cedine-green/25 pointer-events-none" data-speed="-0.15"></div>
+    <div class="parallax-layer hidden md:block absolute -left-20 bottom-16 w-72 h-72 rounded-full border-[14px] border-cedine-orange/25 pointer-events-none" data-speed="0.2"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8 text-white">
+        <div data-aos="fade-down" class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-xs sm:text-sm font-medium mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-cedine-orange animate-pulse"></span>
+          <span data-i18n="hero_badge">Bogotá, Colombia • Educación Especial, Inclusión y Terapia</span>
+        </div>
+
+        <h1 data-aos="fade-up" data-aos-delay="100" class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.12] tracking-tight mb-6" data-i18n="hero_title">
+          Cada niño avanza a su ritmo. Nosotros caminamos con él.
+        </h1>
+
+        <p data-aos="fade-up" data-aos-delay="200" class="text-lg sm:text-xl text-blue-50/95 max-w-2xl leading-relaxed mb-6" data-i18n="hero_desc">
+          Acompañamos el desarrollo pedagógico y terapéutico de niños y jóvenes con necesidades educativas y discapacidad en zonas vulnerables de Colombia.
+        </p>
+
+        <p data-aos="fade-up" data-aos-delay="250" class="font-playful font-bold text-2xl sm:text-3xl text-cedine-orange mb-8 tracking-wide" data-i18n="hero_motto">
+          “Cuestión de actitud”
+        </p>
+
+        <div data-aos="fade-up" data-aos-delay="300" class="flex flex-wrap items-center gap-4">
+          <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base sm:text-lg px-8 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2" data-i18n="hero_cta_primary">
+            <span>Quiero Apoyar</span>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+          </a>
+
+          <a href="galeria.html" class="bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/30 font-display font-medium text-base sm:text-lg px-8 py-4 rounded-full transition-all" data-i18n="hero_cta_secondary">
+            Ver Jornadas en Acción
+          </a>
+        </div>
+      </div>
+
+      <div data-aos="zoom-in" data-aos-delay="200" class="lg:col-span-4 flex justify-center">
+        <div class="bg-white rounded-3xl p-8 shadow-2xl border-4 border-cedine-green/30 max-w-xs w-full text-center">
+          <img src="assets/img/imagotipo-cedine.svg" alt="Imagotipo Oficial Fundación CEDINE" class="w-48 mx-auto mb-5" />
+          <div class="h-1 w-16 bg-cedine-orange rounded-full mx-auto mb-4"></div>
+          <p class="text-xs font-semibold uppercase tracking-wider text-cedine-blue" data-i18n="hero_card_sub">
+            Centro de Diagnóstico de Necesidades Educativas
+          </p>
+          <p class="text-[11px] text-slate-500 mt-1">NIT 900.773.102-4 • Bogotá</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ==================== GALERÍA DE FOTOS REALES (11 IMÁGENES) ==================== -->
+  <!-- ==================== ACCESOS RÁPIDOS A CADA SECCIÓN (SIN SATURAR) ==================== -->
   <section class="py-20 px-6 bg-white">
     <div class="max-w-7xl mx-auto">
-      <div class="flex items-center justify-between mb-10">
-        <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue" data-i18n="gal_photos_title">Momentos de Nuestras Actividades</h2>
-        <span class="text-xs font-medium text-slate-500" data-i18n="gal_click_hint">Haz clic en una foto para ampliar</span>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="photo-grid">
-        <!-- Se generan automáticamente las 11 fotos renombradas -->
-        <div onclick="openLightbox('assets/media/fotos/jornada-01.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-01.jpg" alt="Actividad Fundación CEDINE 1" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-02.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-02.jpg" alt="Actividad Fundación CEDINE 2" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-03.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-03.jpg" alt="Actividad Fundación CEDINE 3" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-04.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-04.jpg" alt="Actividad Fundación CEDINE 4" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-05.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-05.jpg" alt="Actividad Fundación CEDINE 5" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-06.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-06.jpg" alt="Actividad Fundación CEDINE 6" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-07.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-07.jpg" alt="Actividad Fundación CEDINE 7" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-08.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-08.jpg" alt="Actividad Fundación CEDINE 8" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-09.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-09.jpg" alt="Actividad Fundación CEDINE 9" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-10.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-10.jpg" alt="Actividad Fundación CEDINE 10" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-        <div onclick="openLightbox('assets/media/fotos/jornada-11.jpg')" class="cursor-pointer group overflow-hidden rounded-3xl shadow-sm border border-slate-100 aspect-[4/3] bg-slate-100">
-          <img src="assets/media/fotos/jornada-11.jpg" alt="Actividad Fundación CEDINE 11" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== VIDEOS DE ACTIVIDADES REALES (8 VIDEOS) ==================== -->
-  <section class="py-20 px-6 bg-cedine-cream">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-3" data-i18n="gal_videos_title">
-          Videos de Nuestras Sesiones
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-cedine-blue mb-3" data-i18n="home_explore_title">
+          Descubre el corazón de CEDINE
         </h2>
-        <p class="text-slate-600 text-sm sm:text-base" data-i18n="gal_videos_sub">
-          Conoce de cerca cómo se viven nuestras terapias y encuentros comunitarios.
+        <p class="text-slate-600" data-i18n="home_explore_sub">
+          Explora nuestra historia, nuestras terapias especializadas, nuestras jornadas reales o cómo sumarte como aliado.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-01.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-02.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-03.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-04.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-05.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-06.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-07.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div class="bg-white rounded-3xl p-3 shadow-sm border border-slate-100">
-          <video controls preload="metadata" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
-            <source src="assets/media/videos/actividad-08.mp4" type="video/mp4" />
-          </video>
-        </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -> nosotros.html -->
+        <a href="nosotros.html" data-aos="fade-up" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-cedine-blue/10 text-cedine-blue text-xs font-display font-semibold mb-4" data-i18n="card_1_tag">Identidad y Propósito</span>
+            <h3 class="font-display font-bold text-xl text-cedine-blue mb-3 group-hover:text-cedine-orange transition-colors" data-i18n="card_1_title">Nuestra Labor</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="card_1_desc">
+              Conoce qué significa nuestro símbolo, nuestra metodología de inclusión y el respaldo legal en Bogotá.
+            </p>
+          </div>
+          <span class="font-display font-semibold text-sm text-cedine-blue flex items-center gap-2">
+            <span data-i18n="card_1_link">Conocer historia</span> →
+          </span>
+        </a>
+
+        <!-- Card 2 -> programas.html -->
+        <a href="programas.html" data-aos="fade-up" data-aos-delay="100" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-cedine-green/20 text-cedine-blue text-xs font-display font-semibold mb-4" data-i18n="card_2_tag">4 Líneas Terapéuticas</span>
+            <h3 class="font-display font-bold text-xl text-cedine-blue mb-3 group-hover:text-cedine-orange transition-colors" data-i18n="card_2_title">Terapias e Inclusión</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="card_2_desc">
+              Diagnóstico pedagógico, zooterapia asistida con perros, terapia motriz al aire libre y terapia acuática.
+            </p>
+          </div>
+          <span class="font-display font-semibold text-sm text-cedine-blue flex items-center gap-2">
+            <span data-i18n="card_2_link">Ver programas</span> →
+          </span>
+        </a>
+
+        <!-- Card 3 -> galeria.html -->
+        <a href="galeria.html" data-aos="fade-up" data-aos-delay="150" class="group bg-cedine-cream rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange text-xs font-display font-semibold mb-4" data-i18n="card_gal_tag">Evidencia Real</span>
+            <h3 class="font-display font-bold text-xl text-cedine-blue mb-3 group-hover:text-cedine-orange transition-colors" data-i18n="card_gal_title">Jornadas en Acción</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="card_gal_desc">
+              Recorre nuestro carrusel fotográfico y audiovisual de sesiones reales con niños, familias y perros de terapia.
+            </p>
+          </div>
+          <span class="font-display font-semibold text-sm text-cedine-blue flex items-center gap-2">
+            <span data-i18n="card_gal_link">Abrir galería</span> →
+          </span>
+        </a>
+
+        <!-- Card 4 -> donar.html -->
+        <a href="donar.html" data-aos="fade-up" data-aos-delay="200" class="group bg-cedine-blue text-white rounded-3xl p-7 shadow-md hover:shadow-xl transition-all flex flex-col justify-between">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange text-white text-xs font-display font-semibold mb-4" data-i18n="card_3_tag">Súmate al Cambio</span>
+            <h3 class="font-display font-bold text-xl mb-3" data-i18n="card_3_title">Apoyar y Contactar</h3>
+            <p class="text-blue-100 text-sm leading-relaxed mb-6" data-i18n="card_3_desc">
+              Canales oficiales de donación, voluntariado, alianzas y contacto directo por WhatsApp con nuestro equipo.
+            </p>
+          </div>
+          <span class="font-display font-semibold text-sm text-cedine-orange flex items-center gap-2">
+            <span data-i18n="card_3_link">Cómo ayudar</span> →
+          </span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Modal Lightbox para ampliar fotos -->
-  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm items-center justify-center p-4">
-    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-cedine-orange">&times;</button>
-    <img id="lightbox-img" src="" alt="Vista ampliada" class="max-h-[88vh] max-w-[92vw] rounded-2xl shadow-2xl object-contain" />
-  </div>
+  <!-- ==================== BANDA PARALLAX DE IMPACTO ==================== -->
+  <section class="relative py-20 px-6 overflow-hidden">
+    <div class="parallax-bg absolute inset-0 z-0 bg-cover bg-center" data-speed="0.3" style="background-image: url('assets/media/fotos/jornada-05.jpg');">
+      <div class="absolute inset-0 bg-cedine-blue/90"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto text-center text-white">
+      <p class="font-playful font-bold text-3xl sm:text-4xl text-cedine-orange mb-2">“Cuestión de actitud”</p>
+      <h2 class="font-display font-bold text-2xl sm:text-3xl mb-12" data-i18n="impact_title">Caminando juntos por la inclusión</h2>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6">
+          <span class="counter font-display font-extrabold text-4xl text-cedine-orange block mb-1" data-target="100">0</span>
+          <span class="text-xs sm:text-sm text-blue-100" data-i18n="stat_1">% Compromiso Social</span>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6">
+          <span class="counter font-display font-extrabold text-4xl text-cedine-green block mb-1" data-target="4">0</span>
+          <span class="text-xs sm:text-sm text-blue-100" data-i18n="stat_2">Líneas Terapéuticas</span>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6">
+          <span class="counter font-display font-extrabold text-4xl text-white block mb-1" data-target="12">0</span>
+          <span class="text-xs sm:text-sm text-blue-100" data-i18n="stat_3">Años de Trayectoria</span>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6">
+          <span class="counter font-display font-extrabold text-4xl text-cedine-orange block mb-1" data-target="500">0</span>
+          <span class="text-xs sm:text-sm text-blue-100" data-i18n="stat_4">+ Familias Acompañadas</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ==================== FOOTER COMPACTO ==================== -->
   <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
@@ -255,6 +303,7 @@
         <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
         <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
       </div>
+
       <div class="flex flex-wrap gap-6 text-sm text-blue-100">
         <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
         <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
@@ -263,25 +312,13 @@
         <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
       </div>
     </div>
+
     <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
       <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
       <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
     </div>
   </footer>
 
-  <script>
-    function openLightbox(src) {
-      const lb = document.getElementById('lightbox');
-      document.getElementById('lightbox-img').src = src;
-      lb.classList.remove('hidden');
-      lb.classList.add('flex');
-    }
-    function closeLightbox() {
-      const lb = document.getElementById('lightbox');
-      lb.classList.add('hidden');
-      lb.classList.remove('flex');
-    }
-  </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jornadas y Galería | Fundación CEDINE • Bogotá, Colombia</title>
+  <meta name="description" content="Conoce las jornadas reales, actividades terapéuticas y el impacto de la Fundación CEDINE en Bogotá, Colombia." />
+  <meta name="keywords" content="Fundacion CEDINE, jornadas CEDINE, zooterapia Bogota, terapia acuatica, terapia motriz, educacion especial Colombia" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fundacioncedine.org/galeria.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+            display: ['Fredoka', 'sans-serif'],
+            playful: ['Baloo 2', 'cursive'],
+          },
+          colors: {
+            cedine: {
+              blue: '#1C4B7C',
+              green: '#91BE66',
+              orange: '#F79638',
+              cream: '#FDFBF7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
+  <style>
+    /* Ocultar barra de scroll nativa en los carruseles */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
+      <a href="index.html" class="py-1 focus:outline-none">
+        <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-7 text-[15px] font-medium text-cedine-blue">
+        <a href="index.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="galeria.html" class="text-cedine-orange font-semibold" data-i18n="nav_gallery">Jornadas</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-4">
+        <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
+          <span id="current-lang">ES</span>
+        </button>
+        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md transition" data-i18n="nav_donate">
+          Apoyar Ahora
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
+      <a href="index.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
+      <a href="nosotros.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
+      <a href="programas.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
+      <a href="galeria.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_gallery">Jornadas</a>
+      <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
+    </div>
+  </header>
+
+  <!-- ==================== CABECERA ==================== -->
+  <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="gal_tag">
+        Evidencia Real • Bogotá, Colombia
+      </span>
+      <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-4" data-i18n="gal_title">
+        Nuestras Jornadas en Acción
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="gal_sub">
+        Cada sonrisa, cada avance motriz y cada encuentro con nuestros perros de terapia es posible gracias al trabajo en equipo con las familias.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== CARRUSEL 1: FOTOS DE JORNADAS (11 IMÁGENES) ==================== -->
+  <section class="py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-display font-bold uppercase tracking-wider text-cedine-orange" data-i18n="gal_carousel_badge">Galería Fotográfica</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue" data-i18n="gal_photos_title">Momentos de Nuestras Actividades</h2>
+        </div>
+
+        <!-- Botones de navegación del carrusel de fotos -->
+        <div class="flex items-center gap-3">
+          <span id="photo-counter" class="text-sm font-display font-semibold text-slate-500 mr-2">1 / 11</span>
+          <button onclick="movePhotoCarousel(-1)" aria-label="Foto anterior" class="w-11 h-11 rounded-full bg-cedine-cream border border-slate-200 text-cedine-blue hover:bg-cedine-blue hover:text-white flex items-center justify-center shadow-sm transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="movePhotoCarousel(1)" aria-label="Siguiente foto" class="w-11 h-11 rounded-full bg-cedine-blue text-white hover:bg-cedine-orange flex items-center justify-center shadow-sm transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Contenedor Principal del Carrusel de Fotos -->
+      <div class="relative rounded-3xl overflow-hidden shadow-xl bg-slate-900 border-4 border-cedine-cream">
+        <div id="photo-track" class="flex transition-transform duration-500 ease-out">
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-01.jpg')">
+            <img src="assets/media/fotos/jornada-01.jpg" alt="Jornada Fundación CEDINE 1" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-02.jpg')">
+            <img src="assets/media/fotos/jornada-02.jpg" alt="Jornada Fundación CEDINE 2" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-03.jpg')">
+            <img src="assets/media/fotos/jornada-03.jpg" alt="Jornada Fundación CEDINE 3" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-04.jpg')">
+            <img src="assets/media/fotos/jornada-04.jpg" alt="Jornada Fundación CEDINE 4" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-05.jpg')">
+            <img src="assets/media/fotos/jornada-05.jpg" alt="Jornada Fundación CEDINE 5" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-06.jpg')">
+            <img src="assets/media/fotos/jornada-06.jpg" alt="Jornada Fundación CEDINE 6" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-07.jpg')">
+            <img src="assets/media/fotos/jornada-07.jpg" alt="Jornada Fundación CEDINE 7" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-08.jpg')">
+            <img src="assets/media/fotos/jornada-08.jpg" alt="Jornada Fundación CEDINE 8" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-09.jpg')">
+            <img src="assets/media/fotos/jornada-09.jpg" alt="Jornada Fundación CEDINE 9" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-10.jpg')">
+            <img src="assets/media/fotos/jornada-10.jpg" alt="Jornada Fundación CEDINE 10" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+          <div class="w-full shrink-0 aspect-[16/10] sm:aspect-[16/9] relative cursor-pointer" onclick="openLightbox('assets/media/fotos/jornada-11.jpg')">
+            <img src="assets/media/fotos/jornada-11.jpg" alt="Jornada Fundación CEDINE 11" loading="lazy" class="w-full h-full object-contain bg-slate-900" />
+          </div>
+        </div>
+
+        <!-- Flechas flotantes laterales -->
+        <button onclick="movePhotoCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/85 hover:bg-white text-cedine-blue flex items-center justify-center shadow-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button onclick="movePhotoCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/85 hover:bg-white text-cedine-blue flex items-center justify-center shadow-lg transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- Miniaturas seleccionables (Thumbnails) -->
+      <div id="photo-thumbs" class="flex gap-3 overflow-x-auto no-scrollbar mt-5 pb-2">
+        <button onclick="goToPhoto(0)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-cedine-orange opacity-100 transition">
+          <img src="assets/media/fotos/jornada-01.jpg" alt="Miniatura 1" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(1)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-02.jpg" alt="Miniatura 2" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(2)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-03.jpg" alt="Miniatura 3" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(3)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-04.jpg" alt="Miniatura 4" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(4)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-05.jpg" alt="Miniatura 5" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(5)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-06.jpg" alt="Miniatura 6" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(6)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-07.jpg" alt="Miniatura 7" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(7)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-08.jpg" alt="Miniatura 8" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(8)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-09.jpg" alt="Miniatura 9" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(9)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-10.jpg" alt="Miniatura 10" class="w-full h-full object-cover" />
+        </button>
+        <button onclick="goToPhoto(10)" class="thumb-btn shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 transition">
+          <img src="assets/media/fotos/jornada-11.jpg" alt="Miniatura 11" class="w-full h-full object-cover" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CARRUSEL 2: VIDEOS DE SESIONES (LISTA PARA SUBIR) ==================== -->
+  <section class="py-16 px-6 bg-cedine-cream border-t border-slate-200/60">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-display font-bold uppercase tracking-wider text-cedine-green" data-i18n="gal_vid_badge">Experiencias en Video</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue" data-i18n="gal_videos_title">
+            Videos de Nuestras Sesiones
+          </h2>
+          <p class="text-slate-600 text-sm mt-1" data-i18n="gal_videos_sub">
+            Desliza horizontalmente para ver cada cápsula de nuestras actividades terapéuticas.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="scrollVideoCarousel(-1)" aria-label="Video anterior" class="w-11 h-11 rounded-full bg-white border border-slate-200 text-cedine-blue hover:bg-cedine-blue hover:text-white flex items-center justify-center shadow-sm transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button onclick="scrollVideoCarousel(1)" aria-label="Siguiente video" class="w-11 h-11 rounded-full bg-cedine-blue text-white hover:bg-cedine-orange flex items-center justify-center shadow-sm transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Carrusel Horizontal Deslizable de Videos -->
+      <div id="video-carousel" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pb-4">
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-01.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-01.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-02.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-02.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-03.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-03.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-04.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-04.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-05.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-05.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-06.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-06.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-07.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-07.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="snap-start shrink-0 w-64 sm:w-72 bg-white rounded-3xl p-3 shadow-md border border-slate-100">
+          <video controls preload="metadata" poster="assets/media/fotos/jornada-08.jpg" class="w-full rounded-2xl aspect-[9/16] object-cover bg-slate-900">
+            <source src="assets/media/videos/actividad-08.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Lightbox para ampliar fotos -->
+  <div id="lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-sm items-center justify-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-cedine-orange">&times;</button>
+    <img id="lightbox-img" src="" alt="Vista ampliada" class="max-h-[88vh] max-w-[92vw] rounded-2xl shadow-2xl object-contain" />
+  </div>
+
+  <!-- ==================== FOOTER COMPACTO ==================== -->
+  <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
+      <div>
+        <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
+        <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-blue-100">
+        <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="hover:text-cedine-orange transition" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="galeria.html" class="hover:text-cedine-orange transition" data-i18n="nav_gallery">Jornadas</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
+      <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
+      <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
+    </div>
+  </footer>
+
+  <script>
+    // Lógica del Carrusel Principal de Fotos
+    let currentPhoto = 0;
+    const totalPhotos = 11;
+    const photoTrack = document.getElementById('photo-track');
+    const photoCounter = document.getElementById('photo-counter');
+    const thumbButtons = document.querySelectorAll('.thumb-btn');
+
+    function updatePhotoCarousel() {
+      photoTrack.style.transform = `translateX(-${currentPhoto * 100}%)`;
+      photoCounter.textContent = `${currentPhoto + 1} / ${totalPhotos}`;
+      thumbButtons.forEach((btn, idx) => {
+        if (idx === currentPhoto) {
+          btn.classList.add('border-cedine-orange', 'opacity-100');
+          btn.classList.remove('border-transparent', 'opacity-60');
+        } else {
+          btn.classList.remove('border-cedine-orange', 'opacity-100');
+          btn.classList.add('border-transparent', 'opacity-60');
+        }
+      });
+    }
+
+    function movePhotoCarousel(step) {
+      currentPhoto = (currentPhoto + step + totalPhotos) % totalPhotos;
+      updatePhotoCarousel();
+    }
+
+    function goToPhoto(index) {
+      currentPhoto = index;
+      updatePhotoCarousel();
+    }
+
+    // Lógica del Carrusel Horizontal de Videos
+    function scrollVideoCarousel(direction) {
+      const container = document.getElementById('video-carousel');
+      container.scrollBy({ left: direction * 310, behavior: 'smooth' });
+    }
+
+    // Visor Lightbox
+    function openLightbox(src) {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.classList.remove('hidden');
+      lb.classList.add('flex');
+    }
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('hidden');
+      lb.classList.remove('flex');
+    }
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
