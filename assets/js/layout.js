@@ -6,6 +6,7 @@
     { href: '/', slug: '', key: 'nav_home', label: 'Inicio' },
     { href: '/nosotros', slug: 'nosotros', key: 'nav_about', label: 'Nuestra Labor' },
     { href: '/programas', slug: 'programas', key: 'nav_programs', label: 'Terapias e Inclusión' },
+    { href: '/casos-de-exito', slug: 'casos-de-exito', key: 'nav_cases', label: 'Casos de Éxito' },
     { href: '/galeria', slug: 'galeria', key: 'nav_gallery', label: 'Jornadas' }
   ];
 
