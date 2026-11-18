@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verificación de Certificados | Fundación CEDINE • Bogotá, Colombia</title>
-  <meta name="description" content="Portal oficial de verificación de certificados emitidos por la Fundación CEDINE (NIT 900.773.102-4) mediante código único de aprobación." />
+  <meta name="description" content="Portal oficial de verificación y descarga en PDF de certificados emitidos por la Fundación CEDINE (NIT 900.773.102-4) mediante código único de aprobación." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://fundacioncedine.org/verificacion" />
   <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -38,6 +38,9 @@
     }
   </script>
 
+  <!-- Librería jsPDF para generación directa de PDF único en el navegador -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
 </head>
@@ -55,7 +58,7 @@
         Verificación Oficial de Certificados
       </h1>
       <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="ver_sub">
-        Por protección de datos personales (Ley 1581 de 2012), la validación se realiza exclusivamente ingresando el código único de aprobación impreso en el certificado.
+        Por protección de datos personales (Ley 1581 de 2012), la validación y descarga en PDF se realiza exclusivamente ingresando el código único de aprobación impreso en el certificado.
       </p>
     </div>
   </section>
@@ -81,7 +84,7 @@
             class="w-full px-4 py-3.5 rounded-2xl bg-white border-2 border-slate-300 font-mono text-base text-slate-900 focus:outline-none focus:border-cedine-blue focus:ring-2 focus:ring-cedine-blue/30"
           />
           <p id="code-help" class="text-xs text-slate-600 mt-2">
-            Ingresa el código alfanumérico exacto sin puntos ni espacios adicionales. No se realizan consultas por nombre ni por número de documento.
+            Ingresa el código alfanumérico exacto sin puntos ni espacios adicionales.
           </p>
         </div>
 
@@ -91,11 +94,11 @@
           class="w-full bg-cedine-blue hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-cedine-blue/40 text-white font-display font-semibold text-base py-4 px-6 rounded-full shadow-md transition"
           data-i18n="ver_btn_submit"
         >
-          Validar Certificado
+          Validar y Generar Certificado
         </button>
       </form>
 
-      <!-- Contenedor de Resultado Único (ARIA Live para lectores de pantalla) -->
+      <!-- Contenedor de Resultado Único -->
       <div id="verify-result" aria-live="polite" class="mt-8"></div>
 
     </div>
@@ -105,14 +108,15 @@
 
   <script src="assets/js/layout.js"></script>
   <script>
-    // Configuración del endpoint RPC de Supabase (completar URL y anon key al crear el proyecto)
-    NEXT_PUBLIC_SUPABASE_URL='https://sjfoivxzmaxaevsvjqcv.supabase.co'
-    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY='sb_publishable_ateiww11CKWirRw0Vamh8g_wOf1vvAB'
+    const SUPABASE_URL = 'https://sjfoivxzmaxaevsvjqcv.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_ateiww11CKWirRw0Vamh8g_wOf1vvAB';
 
-const verifyForm = document.getElementById('verify-form');
+    const verifyForm = document.getElementById('verify-form');
     const codeInput = document.getElementById('approval-code');
     const resultBox = document.getElementById('verify-result');
     const submitBtn = document.getElementById('verify-btn');
+
+    let currentVerifiedCert = null;
 
     function escapeHtml(str) {
       return String(str || '').replace(/[&<>"']/g, (m) => ({
@@ -134,6 +138,281 @@ const verifyForm = document.getElementById('verify-form');
       `;
     }
 
+    // Convierte un SVG local en PNG Base64 (con opacidad opcional para marca de agua)
+    function svgToPngDataUrl(svgUrl, width, height, opacity = 1) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.globalAlpha = opacity;
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/png'));
+        };
+        img.onerror = () => resolve(null);
+        img.src = svgUrl;
+      });
+    }
+
+    // Formatea fecha DD/MM/YYYY a "12 días del mes de agosto de 2026"
+    function formatearFechaCertificado(fechaStr) {
+      const meses = [
+        'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+      ];
+      const partes = String(fechaStr || '').split('/');
+      if (partes.length === 3) {
+        const dia = parseInt(partes[0], 10);
+        const mesIdx = parseInt(partes[1], 10) - 1;
+        const anio = partes[2];
+        if (!isNaN(dia) && meses[mesIdx]) {
+          return `a los ${dia} días del mes de ${meses[mesIdx]} de ${anio}`;
+        }
+      }
+      return `con fecha ${fechaStr}`;
+    }
+
+    // Determina intensidad horaria y si aplica distintivo Ley 1503 de 2011 según el curso
+    function obtenerMetadataCurso(cursoRaw) {
+      const cursoUpper = String(cursoRaw || '').toUpperCase();
+      const esVial20h =
+        cursoUpper.includes('SEGURIDAD VIAL') ||
+        cursoUpper.includes('NORMAS DE TRÁNSITO') ||
+        cursoUpper.includes('NORMAS DE TRANSITO');
+      const esVial40h =
+        cursoUpper.includes('MANEJO DEFENSIVO') ||
+        cursoUpper.includes('ALISTAMIENTO VEHICULAR');
+
+      return {
+        cursoTitulo: cursoUpper,
+        horas: esVial20h ? '20 horas' : '40 horas',
+        aplicaLey1503: esVial20h || esVial40h
+      };
+    }
+
+    // Genera y descarga el PDF único con la plantilla oficial de Fundación CEDINE
+    async function descargarCertificadoPDF(cert) {
+      const btnPdf = document.getElementById('btn-download-pdf');
+      if (btnPdf) {
+        btnPdf.disabled = true;
+        btnPdf.textContent = 'Generando documento PDF...';
+      }
+
+      try {
+        const { jsPDF } = window.jspdf;
+        // Formato Carta Horizontal (279.4 mm x 215.9 mm)
+        const doc = new jsPDF({
+          orientation: 'landscape',
+          unit: 'mm',
+          format: 'letter'
+        });
+
+        const pageW = doc.internal.pageSize.getWidth();
+        const pageH = doc.internal.pageSize.getHeight();
+        const meta = obtenerMetadataCurso(cert.curso);
+
+        // 1. Fondo blanco y marco institucional sutil
+        doc.setFillColor(255, 255, 255);
+        doc.rect(0, 0, pageW, pageH, 'F');
+
+        doc.setDrawColor(28, 75, 124); // Azul CEDINE #1C4B7C
+        doc.setLineWidth(1.2);
+        doc.rect(8, 8, pageW - 16, pageH - 16);
+
+        doc.setDrawColor(247, 150, 56); // Naranja CEDINE #F79638
+        doc.setLineWidth(0.5);
+        doc.rect(10.5, 10.5, pageW - 21, pageH - 21);
+
+        // 2. Marca de agua central (Isotipo CEDINE translúcido)
+        const watermarkPng = await svgToPngDataUrl('assets/img/isotipo-cedine.svg', 600, 600, 0.08);
+        if (watermarkPng) {
+          doc.addImage(watermarkPng, 'PNG', (pageW - 125) / 2, (pageH - 125) / 2 + 4, 125, 125);
+        }
+
+        // 3. Encabezado superior:
+        // Izquierda: Emblema República de Colombia
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8.5);
+        doc.setTextColor(28, 75, 124);
+        doc.text('REPÚBLICA DE COLOMBIA', 36, 23, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(80, 90, 105);
+        doc.text('LIBERTAD Y ORDEN', 36, 27.5, { align: 'center' });
+        // Bandera tricolor estilizada
+        doc.setFillColor(252, 209, 22);
+        doc.rect(24, 30, 24, 2.2, 'F');
+        doc.setFillColor(0, 56, 147);
+        doc.rect(24, 32.2, 24, 1.4, 'F');
+        doc.setFillColor(206, 17, 38);
+        doc.rect(24, 33.6, 24, 1.4, 'F');
+
+        // Centro: Razón Social Oficial
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.setTextColor(28, 75, 124);
+        doc.text('CENTRO DE DIAGNÓSTICO DE', pageW / 2, 24, { align: 'center' });
+        doc.text('NECESIDADES EDUCATIVAS', pageW / 2, 30, { align: 'center' });
+
+        // Derecha: Imagotipo Horizontal CEDINE + NIT
+        const logoPng = await svgToPngDataUrl('assets/img/imagotipo-horizontal-cedine.svg', 640, 200, 1);
+        if (logoPng) {
+          doc.addImage(logoPng, 'PNG', pageW - 76, 15, 58, 18);
+        }
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9.5);
+        doc.setTextColor(28, 75, 124);
+        doc.text('NIT. 900.773.102-4', pageW - 47, 37.5, { align: 'center' });
+
+        // 4. Cuerpo del Certificado
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(17);
+        doc.setTextColor(28, 75, 124);
+        doc.text('CERTIFICA QUE:', pageW / 2, 56, { align: 'center' });
+
+        // Nombre completo del titular
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.setTextColor(15, 23, 42);
+        doc.text(String(cert.nombre_completo || '').toUpperCase(), pageW / 2, 72, { align: 'center' });
+
+        // Línea decorativa bajo el nombre
+        doc.setDrawColor(145, 190, 102); // Verde CEDINE
+        doc.setLineWidth(0.7);
+        doc.line(65, 76, pageW - 65, 76);
+
+        // Identificación
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(12);
+        doc.setTextColor(51, 65, 85);
+        doc.text(`Identificado(a) con documento de identidad No. ${cert.identificacion_enmascarada}.`, pageW / 2, 86, { align: 'center' });
+
+        // Texto del curso e intensidad horaria
+        doc.setFontSize(12.5);
+        doc.text('Asistió y aprobó el curso de:', pageW / 2, 98, { align: 'center' });
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(16);
+        doc.setTextColor(28, 75, 124);
+        const cursoLineas = doc.splitTextToSize(`${meta.cursoTitulo}, con una intensidad de ${meta.horas}.`, pageW - 56);
+        doc.text(cursoLineas, pageW / 2, 108, { align: 'center' });
+
+        // Código de aprobación
+        const yCodigo = 108 + (cursoLineas.length * 7) + 4;
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11.5);
+        doc.setTextColor(184, 84, 0); // Naranja oscuro accesible
+        doc.text(`Cód. Aprobación: ${cert.codigo_verificacion}.`, pageW / 2, yCodigo, { align: 'center' });
+
+        // Ciudad y fecha de expedición
+        const fechaTexto = formatearFechaCertificado(cert.fecha_realizacion);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.setTextColor(51, 65, 85);
+        doc.text(
+          `La presente se certifica a solicitud del interesado en la ciudad de Bogotá D.C., ${fechaTexto}.`,
+          pageW / 2,
+          yCodigo + 11,
+          { align: 'center' }
+        );
+
+        // 5. Bloques de Firma (Directora Ejecutiva e Instructor)
+        const yFirmas = 168;
+        doc.setDrawColor(30, 41, 59);
+        doc.setLineWidth(0.5);
+
+        // Firma Izquierda: Directora Ejecutiva
+        doc.line(42, yFirmas, 108, yFirmas);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(28, 75, 124);
+        doc.text('DIRECTORA EJECUTIVA', 75, yFirmas + 5.5, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(100, 116, 139);
+        doc.text('Fundación CEDINE', 75, yFirmas + 10, { align: 'center' });
+
+        // Firma Derecha: Instructor
+        doc.line(pageW - 108, yFirmas, pageW - 42, yFirmas);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(10);
+        doc.setTextColor(28, 75, 124);
+        doc.text('INSTRUCTOR', pageW - 75, yFirmas + 5.5, { align: 'center' });
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.5);
+        doc.setTextColor(100, 116, 139);
+        doc.text('Área de Formación y Capacitación', pageW - 75, yFirmas + 10, { align: 'center' });
+
+        // 6. Distintivo Normativo Central (LEY 1503 DE 2011 para cursos viales o Sello Institucional)
+        if (meta.aplicaLey1503) {
+          // Óvalo amarillo con franjas negras estilo señalización vial Ley 1503
+          doc.setFillColor(250, 204, 21);
+          doc.setDrawColor(202, 138, 4);
+          doc.setLineWidth(0.5);
+          doc.ellipse(pageW / 2, 161, 13, 9.5, 'FD');
+
+          doc.setFillColor(15, 23, 42);
+          doc.roundedRect((pageW / 2) - 6.5, 155.5, 2.6, 11, 1, 1, 'F');
+          doc.roundedRect((pageW / 2) - 1.3, 155.5, 2.6, 11, 1, 1, 'F');
+          doc.roundedRect((pageW / 2) + 3.9, 155.5, 2.6, 11, 1, 1, 'F');
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8.5);
+          doc.setTextColor(15, 23, 42);
+          doc.text('LEY 1503 DE 2011', pageW / 2, 175.5, { align: 'center' });
+        } else {
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(8.5);
+          doc.setTextColor(61, 107, 30);
+          doc.text('CERTIFICACIÓN VERIFICABLE EN LÍNEA', pageW / 2, 170, { align: 'center' });
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(100, 116, 139);
+          doc.text('fundacioncedine.org/verificacion', pageW / 2, 174.5, { align: 'center' });
+        }
+
+        // 7. Pie de página institucional oficial
+        doc.setDrawColor(203, 213, 225);
+        doc.setLineWidth(0.4);
+        doc.line(20, 189, pageW - 20, 189);
+
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        doc.setTextColor(28, 75, 124);
+        doc.text(
+          'Calle 11ª N° 35-23, Pensilvania, Bogotá D.C.  ·  Tel. 601 9087403  ·  Cel. 312 5182773 – 321 2124828',
+          pageW / 2,
+          195.5,
+          { align: 'center' }
+        );
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(7.5);
+        doc.setTextColor(100, 116, 139);
+        doc.text(
+          'Documento generado electrónicamente desde el portal oficial de la Fundación CEDINE (Matrícula CCB S00047132).',
+          pageW / 2,
+          200.5,
+          { align: 'center' }
+        );
+
+        // Descargar archivo PDF único
+        const nombreArchivo = `Certificado_CEDINE_${cert.codigo_verificacion}.pdf`;
+        doc.save(nombreArchivo);
+      } catch (err) {
+        console.error('Error generando PDF:', err);
+        alert('Ocurrió un inconveniente al generar el PDF. Intenta nuevamente.');
+      } finally {
+        if (btnPdf) {
+          btnPdf.disabled = false;
+          btnPdf.textContent = 'Descargar Certificado Oficial (PDF)';
+        }
+      }
+    }
+
     verifyForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const rawCode = codeInput.value.trim().replace(/\.+$/, '');
@@ -145,14 +424,16 @@ const verifyForm = document.getElementById('verify-form');
       }
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Consultando servidor...';
+      submitBtn.textContent = 'Consultando base de datos...';
 
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/verificar_certificado_por_codigo`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY
+            'Accept': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
           },
           body: JSON.stringify({ p_codigo: rawCode })
         });
@@ -163,13 +444,14 @@ const verifyForm = document.getElementById('verify-form');
           console.error('Error Supabase RPC:', data);
           renderMessage(
             'error',
-            'Error de comunicación con la base de datos',
-            `<p>Detalle técnico: <code>${escapeHtml(data.message || res.statusText)}</code>. Verifica que la función RPC esté creada en Supabase.</p>`
+            'Error al consultar la base de datos',
+            `<p>Detalle técnico: <code>${escapeHtml(data.message || data.hint || res.statusText)}</code></p>`
           );
           return;
         }
 
         if (!Array.isArray(data) || data.length === 0) {
+          currentVerifiedCert = null;
           renderMessage(
             'invalid',
             'Certificado no encontrado',
@@ -177,25 +459,45 @@ const verifyForm = document.getElementById('verify-form');
           );
         } else {
           const cert = data[0];
+          currentVerifiedCert = cert;
+          const meta = obtenerMetadataCurso(cert.curso);
+
           renderMessage(
             'valid',
             '✓ Certificado Auténtico y Verificado',
             `
-              <p><strong>Titular:</strong> ${escapeHtml(cert.nombre_completo)}</p>
-              <p><strong>Identificación:</strong> ${escapeHtml(cert.identificacion_enmascarada)}</p>
-              <p><strong>Programa / Curso:</strong> ${escapeHtml(cert.curso)}</p>
-              <p><strong>Código de Aprobación:</strong> <span class="font-mono font-semibold">${escapeHtml(cert.codigo_verificacion)}</span></p>
-              <p><strong>Fecha de Realización:</strong> ${escapeHtml(cert.fecha_realizacion)}</p>
-              <p class="pt-2 text-xs text-slate-600">Emitido por Fundación Centro de Diagnóstico de Necesidades Educativas (CEDINE) • NIT 900.773.102-4.</p>
+              <div class="space-y-1.5 pb-4">
+                <p><strong>Titular:</strong> ${escapeHtml(cert.nombre_completo)}</p>
+                <p><strong>Identificación:</strong> ${escapeHtml(cert.identificacion_enmascarada)}</p>
+                <p><strong>Programa / Curso:</strong> ${escapeHtml(cert.curso)} (${meta.horas})</p>
+                <p><strong>Código de Aprobación:</strong> <span class="font-mono font-semibold">${escapeHtml(cert.codigo_verificacion)}</span></p>
+                <p><strong>Fecha de Realización:</strong> ${escapeHtml(cert.fecha_realizacion)}</p>
+              </div>
+              <div class="pt-3 border-t border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <p class="text-xs text-slate-600">Fundación CEDINE • NIT 900.773.102-4</p>
+                <button
+                  type="button"
+                  id="btn-download-pdf"
+                  onclick="descargarCertificadoPDF(currentVerifiedCert)"
+                  class="inline-flex items-center justify-center gap-2 bg-cedine-orange-dark hover:bg-[#9E4700] text-white font-display font-semibold text-sm px-6 py-3 rounded-full shadow transition"
+                >
+                  <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  <span>Descargar Certificado Oficial (PDF)</span>
+                </button>
+              </div>
             `
           );
         }
       } catch (err) {
-        console.error(err);
-        renderMessage('error', 'No fue posible conectar con el servidor', '<p>Revisa tu conexión o la política CSP en _headers.</p>');
+        console.error('Fetch error:', err);
+        renderMessage(
+          'error',
+          'No fue posible conectar con el servidor',
+          `<p>Detalle técnico: <code>${escapeHtml(err.message)}</code>. Verifica que el archivo _headers tenga permitido el dominio de Supabase.</p>`
+        );
       } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Validar Certificado';
+        submitBtn.textContent = 'Validar y Generar Certificado';
       }
     });
   </script>
