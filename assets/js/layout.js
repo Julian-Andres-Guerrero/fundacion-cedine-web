@@ -86,7 +86,7 @@
             </button>
 
             <a href="donar.html" class="${donateBtnClass}" data-i18n="nav_donate">
-              Contáctenos y Apoyo
+              Donar Ahora
             </a>
           </div>
 
@@ -101,7 +101,7 @@
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl max-h-[85vh] overflow-y-auto">
           ${mobileLinks}
           ${mobileSubLinks}
-          <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Contáctenos y Apoyo</a>
+          <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Donar Ahora</a>
         </div>
       </header>
     `;
@@ -113,7 +113,7 @@
       <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
           <div class="space-y-1.5">
-            <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" /> 
+            <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
             <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula S00047132)</p>
             <p class="text-blue-200 text-xs">Cl 11A No. 35-23 • Bogotá D.C., Colombia</p>
             <p class="text-blue-200 text-xs">Tel: (601) 908 7403 / 317 263 7946 / 312 518 2773 • fundacedine@gmail.com</p>
@@ -126,7 +126,7 @@
             <a href="galeria.html" class="hover:text-cedine-orange transition" data-i18n="nav_gallery">Jornadas</a>
             <a href="formacion.html" class="hover:text-cedine-orange transition" data-i18n="nav_sub_formacion">Formación para el Trabajo</a>
             <a href="verificacion.html" class="hover:text-cedine-orange transition" data-i18n="nav_sub_verif1">Verificación Cursos</a>
-            <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Contáctenos y Apoyo</a>
+            <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Donar Ahora</a>
           </div>
         </div>
 
