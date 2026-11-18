@@ -1,2 +1,7 @@
 -e ".DS_Store\nThumbs.db\n.vscode/\n*.log" 
 "assets/img/*.pdf" 
+
+# Carpetas multimedia originales sin renombrar y PDF maestro
+assets/img/FOTOS FUNDACION/
+assets/img/PROPAGANDA/
+assets/img/*.pdf
