@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terapias e Inclusión | Fundación CEDINE • Bogotá, Colombia</title>
+  <meta name="description" content="Programas terapéuticos y educativos de Fundación CEDINE: Diagnóstico Pedagógico, Zooterapia asistida con perros, Terapia Motriz al aire libre y Terapia Acuática." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+            display: ['Fredoka', 'sans-serif'],
+            playful: ['Baloo 2', 'cursive'],
+          },
+          colors: {
+            cedine: {
+              blue: '#1C4B7C',
+              green: '#91BE66',
+              orange: '#F79638',
+              cream: '#FDFBF7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
+      <a href="index.html" class="py-1 focus:outline-none" aria-label="Inicio Fundación CEDINE">
+        <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-cedine-blue">
+        <a href="index.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="text-cedine-orange font-semibold" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia y Contacto</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-4">
+        <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
+          <span id="current-lang">ES</span>
+          <svg class="w-4 h-4 text-cedine-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+        </button>
+
+        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md shadow-cedine-orange/30 transition-all transform hover:-translate-y-0.5" data-i18n="nav_donate">
+          Apoyar Ahora
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100" aria-label="Abrir menú">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
+      <a href="index.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
+      <a href="nosotros.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
+      <a href="programas.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
+      <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
+    </div>
+  </header>
+
+  <!-- ==================== CABECERA ==================== -->
+  <section class="pt-36 pb-16 px-6 bg-cedine-blue text-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-green font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="prog_tag">
+        Nuestras Líneas de Acción
+      </span>
+      <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5" data-i18n="prog_title">
+        Intervención integral para su desarrollo y bienestar
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="prog_subtitle">
+        Combinamos el acompañamiento pedagógico especializado con terapias asistidas que estimulan la confianza, el movimiento y el aprendizaje.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== BLOQUES DETALLADOS DE LAS 4 TERAPIAS ==================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto space-y-12">
+
+      <!-- Programa 1: Diagnóstico Pedagógico -->
+      <article data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-blue shadow-sm grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-blue/10 text-cedine-blue text-xs font-display font-semibold mb-3" data-i18n="prog_1_badge">Educación Inclusiva</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-4" data-i18n="prog_1_title">
+            1. Diagnóstico Pedagógico y Orientación Familiar
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed mb-4" data-i18n="prog_1_full">
+            Evaluamos de manera cercana y respetuosa el perfil de aprendizaje, comunicación y autonomía de cada niño o joven. A partir de esta valoración, diseñamos planes individualizados y capacitamos a padres y docentes para adaptar el entorno educativo sin barreras.
+          </p>
+        </div>
+        <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
+          <h3 class="font-display font-semibold text-sm text-cedine-blue uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <ul class="space-y-2 text-sm text-slate-600">
+            <li data-i18n="prog_1_b1">• Valoración integral centrada en capacidades</li>
+            <li data-i18n="prog_1_b2">• Ruta pedagógica personalizada</li>
+            <li data-i18n="prog_1_b3">• Escuelas de padres y acompañamiento</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Programa 2: Zooterapia -->
+      <article data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-green shadow-sm grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-green/20 text-cedine-blue text-xs font-display font-semibold mb-3" data-i18n="prog_2_badge">Apoyo Emocional</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-4" data-i18n="prog_2_title">
+            2. Zooterapia (Terapia Asistida con Perros)
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed mb-4" data-i18n="prog_2_full">
+            Nuestros perros de terapia, entrenados bajo estrictos protocolos de bienestar y seguridad, actúan como puente emocional y motivacional. El vínculo natural entre el niño y el perro reduce el estrés, mejora la atención, incentiva el lenguaje y fortalece la autoestima.
+          </p>
+        </div>
+        <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
+          <h3 class="font-display font-semibold text-sm text-cedine-green uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <ul class="space-y-2 text-sm text-slate-600">
+            <li data-i18n="prog_2_b1">• Reducción de ansiedad y bloqueo emocional</li>
+            <li data-i18n="prog_2_b2">• Estímulo de la comunicación y empatía</li>
+            <li data-i18n="prog_2_b3">• Motivación lúdica en cada sesión</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Programa 3: Terapia Motriz al Aire Libre -->
+      <article data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-orange shadow-sm grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange text-xs font-display font-semibold mb-3" data-i18n="prog_3_badge">Desarrollo Físico</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-4" data-i18n="prog_3_title">
+            3. Terapia Motriz y Sensorial al Aire Libre
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed mb-4" data-i18n="prog_3_full">
+            Sacamos el aprendizaje del aula hacia espacios abiertos y naturales. A través de circuitos motores, juego guiado y estímulos sensoriales, fortalecemos la coordinación gruesa y fina, el equilibrio, la orientación espacial y el trabajo en equipo.
+          </p>
+        </div>
+        <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
+          <h3 class="font-display font-semibold text-sm text-cedine-orange uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <ul class="space-y-2 text-sm text-slate-600">
+            <li data-i18n="prog_3_b1">• Coordinación, equilibrio y tono muscular</li>
+            <li data-i18n="prog_3_b2">• Integración sensorial en entornos abiertos</li>
+            <li data-i18n="prog_3_b3">• Socialización y juego inclusivo</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Programa 4: Terapia Acuática -->
+      <article data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-blue shadow-sm grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-blue/10 text-cedine-blue text-xs font-display font-semibold mb-3" data-i18n="prog_4_badge">Salud y Movimiento</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-4" data-i18n="prog_4_title">
+            4. Terapia Acuática
+          </h2>
+          <p class="text-slate-600 text-base leading-relaxed mb-4" data-i18n="prog_4_full">
+            Aprovechamos las propiedades físicas del agua bajo supervisión terapéutica especializada para facilitar movimientos que fuera de ella resultan difíciles. Promueve la relajación neuromuscular, el control respiratorio y una sensación profunda de libertad y confianza.
+          </p>
+        </div>
+        <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
+          <h3 class="font-display font-semibold text-sm text-cedine-blue uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <ul class="space-y-2 text-sm text-slate-600">
+            <li data-i18n="prog_4_b1">• Movilidad articular sin impacto</li>
+            <li data-i18n="prog_4_b2">• Regulación sensorial y relajación</li>
+            <li data-i18n="prog_4_b3">• Autonomía y seguridad en el agua</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Llamado a la acción -->
+    <div class="max-w-4xl mx-auto mt-16 bg-cedine-blue text-white rounded-3xl p-8 sm:p-12 text-center shadow-xl">
+      <h3 class="font-display font-bold text-2xl sm:text-3xl mb-3" data-i18n="prog_cta_title">
+        Ayúdanos a llevar estas terapias a más niños en Bogotá
+      </h3>
+      <p class="text-blue-100 text-sm sm:text-base mb-7 max-w-xl mx-auto" data-i18n="prog_cta_sub">
+        Cada sesión transforma el día a día de una familia. Conoce cómo puedes patrocinar una terapia o vincular tu empresa.
+      </p>
+      <a href="donar.html" class="inline-block bg-cedine-orange hover:brightness-105 text-white font-display font-semibold px-8 py-4 rounded-full shadow-md transition" data-i18n="hero_cta_primary">
+        Quiero Apoyar
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER COMPACTO ==================== -->
+  <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
+      <div>
+        <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
+        <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-blue-100">
+        <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="hover:text-cedine-orange transition" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
+      <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
+      <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Labor | Fundación CEDINE • Bogotá, Colombia</title>
+  <meta name="description" content="Conoce la historia, el significado de nuestro símbolo y el compromiso social de la Fundación CEDINE en Bogotá, Colombia." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+            display: ['Fredoka', 'sans-serif'],
+            playful: ['Baloo 2', 'cursive'],
+          },
+          colors: {
+            cedine: {
+              blue: '#1C4B7C',
+              green: '#91BE66',
+              orange: '#F79638',
+              cream: '#FDFBF7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex items-center justify-between">
+      <a href="index.html" class="py-1 focus:outline-none" aria-label="Inicio Fundación CEDINE">
+        <img src="assets/img/imagotipo-horizontal-cedine.svg" alt="Fundación CEDINE" class="h-12 sm:h-14 w-auto object-contain" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-cedine-blue">
+        <a href="index.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="text-cedine-orange font-semibold" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition-colors" data-i18n="nav_transparency">Transparencia y Contacto</a>
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-4">
+        <button id="lang-toggle" class="px-3.5 py-2 rounded-xl border-2 border-cedine-blue/20 text-xs font-display font-bold text-cedine-blue hover:border-cedine-blue transition flex items-center gap-1.5">
+          <span id="current-lang">ES</span>
+          <svg class="w-4 h-4 text-cedine-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+        </button>
+
+        <a href="donar.html" class="bg-cedine-orange hover:brightness-105 text-white font-display font-semibold text-base px-6 py-2.5 rounded-full shadow-md shadow-cedine-orange/30 transition-all transform hover:-translate-y-0.5" data-i18n="nav_donate">
+          Apoyar Ahora
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 lg:hidden">
+        <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-cedine-blue hover:bg-slate-100" aria-label="Abrir menú">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-6 py-5 flex-col gap-3 shadow-xl">
+      <a href="index.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_home">Inicio</a>
+      <a href="nosotros.html" class="font-display font-semibold text-cedine-orange py-2 border-b border-slate-100" data-i18n="nav_about">Nuestra Labor</a>
+      <a href="programas.html" class="font-display font-medium text-cedine-blue py-2 border-b border-slate-100" data-i18n="nav_programs">Terapias e Inclusión</a>
+      <a href="donar.html" class="mt-2 text-center bg-cedine-orange text-white font-display font-semibold py-3 rounded-full shadow-md" data-i18n="nav_donate">Apoyar Ahora</a>
+    </div>
+  </header>
+
+  <!-- ==================== CABECERA INTERNA ==================== -->
+  <section class="pt-36 pb-16 px-6 bg-cedine-blue text-white relative overflow-hidden">
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="about_tag">
+        Sobre Nosotros
+      </span>
+      <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5" data-i18n="about_title">
+        Potenciamos las capacidades de nuestros niños con amor y rigor profesional
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="about_hero_sub">
+        Una entidad sin ánimo de lucro en Bogotá dedicada al diagnóstico pedagógico, la inclusión y el desarrollo terapéutico integral.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== QUIÉNES SOMOS Y SIGNIFICADO DE LA MARCA ==================== -->
+  <section class="py-20 px-6 bg-white">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Tarjeta del Isotipo y Simbología -->
+      <div data-aos="fade-right" class="lg:col-span-5">
+        <div class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border border-slate-100 shadow-lg">
+          <div class="w-24 h-24 rounded-2xl bg-white shadow-md p-3 mb-6 flex items-center justify-center">
+            <img src="assets/img/isotipo-cedine.svg" alt="Isotipo Fundación CEDINE" class="w-full h-full object-contain" />
+          </div>
+          <h2 class="font-display font-bold text-2xl text-cedine-blue mb-3" data-i18n="about_symbol_title">
+            Un círculo que amanece
+          </h2>
+          <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="about_symbol_desc">
+            Nuestro símbolo representa a un niño feliz acompañado por su perro de terapia, parados sobre el libro abierto de la educación y protegidos por una comunidad donde nadie queda por fuera.
+          </p>
+          <ul class="space-y-3.5 text-sm font-medium">
+            <li class="flex items-center gap-3 text-cedine-blue">
+              <span class="w-3.5 h-3.5 rounded-full bg-cedine-blue shrink-0"></span>
+              <span data-i18n="symbol_book">El libro azul: La educación como cimiento</span>
+            </li>
+            <li class="flex items-center gap-3 text-slate-700">
+              <span class="w-3.5 h-3.5 rounded-full bg-cedine-green shrink-0"></span>
+              <span data-i18n="symbol_dog">El perro verde: Zooterapia y apoyo emocional</span>
+            </li>
+            <li class="flex items-center gap-3 text-slate-700">
+              <span class="w-3.5 h-3.5 rounded-full bg-cedine-orange shrink-0"></span>
+              <span data-i18n="symbol_heart">El corazón naranja: Vocación y “Cuestión de actitud”</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Narrativa y Filosofía -->
+      <div data-aos="fade-left" class="lg:col-span-7 space-y-6">
+        <h3 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue" data-i18n="about_story_title">
+          Personas primero, nunca etiquetas
+        </h3>
+        <p class="text-slate-600 text-base sm:text-lg leading-relaxed" data-i18n="about_p1">
+          La Fundación Centro de Diagnóstico de Necesidades Educativas (CEDINE) es una entidad sin ánimo de lucro constituida en Bogotá que acompaña a niños, jóvenes y familias en condiciones de vulnerabilidad.
+        </p>
+        <p class="text-slate-600 text-base sm:text-lg leading-relaxed" data-i18n="about_p2">
+          Creemos en las personas primero: no nos enfocamos en etiquetas clínicas, sino en descubrir cómo aprende y se comunica cada niño, brindándole herramientas pedagógicas y terapéuticas integrales para su verdadera inclusión social y escolar.
+        </p>
+
+        <blockquote class="p-6 rounded-2xl bg-cedine-cream border-l-4 border-cedine-orange">
+          <p class="font-display font-semibold text-lg text-cedine-blue mb-1" data-i18n="about_quote">
+            “Cada niño avanza a su ritmo. Nosotros caminamos con él.”
+          </p>
+          <span class="font-playful font-bold text-cedine-orange text-xl">— Cuestión de actitud</span>
+        </blockquote>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== CICLO DE 4 PILARES ==================== -->
+  <section class="py-20 px-6 bg-cedine-cream">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
+        <h2 class="font-display font-bold text-3xl text-cedine-blue mb-3" data-i18n="pillars_title">
+          Nuestro Ciclo de Acompañamiento
+        </h2>
+        <p class="text-slate-600" data-i18n="pillars_sub">
+          Un proceso continuo donde familias, educadores y terapeutas trabajan en equipo.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div data-aos="fade-up" class="bg-white rounded-3xl p-7 shadow-sm border-t-4 border-cedine-blue">
+          <span class="font-display font-bold text-3xl text-cedine-blue block mb-2">01</span>
+          <h3 class="font-display font-bold text-xl text-cedine-blue mb-2" data-i18n="pillar_1_t">Diagnosticar</h3>
+          <p class="text-slate-600 text-sm" data-i18n="pillar_1_d">Identificamos las fortalezas y necesidades educativas específicas de cada niño.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-3xl p-7 shadow-sm border-t-4 border-cedine-green">
+          <span class="font-display font-bold text-3xl text-cedine-green block mb-2">02</span>
+          <h3 class="font-display font-bold text-xl text-cedine-blue mb-2" data-i18n="pillar_2_t">Intervenir</h3>
+          <p class="text-slate-600 text-sm" data-i18n="pillar_2_d">Aplicamos terapias asistidas con perros, motricidad al aire libre y terapia acuática.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-3xl p-7 shadow-sm border-t-4 border-cedine-orange">
+          <span class="font-display font-bold text-3xl text-cedine-orange block mb-2">03</span>
+          <h3 class="font-display font-bold text-xl text-cedine-blue mb-2" data-i18n="pillar_3_t">Capacitar</h3>
+          <p class="text-slate-600 text-sm" data-i18n="pillar_3_d">Formamos y acompañamos a padres, cuidadores y docentes para sostener los avances.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="300" class="bg-cedine-blue text-white rounded-3xl p-7 shadow-md">
+          <span class="font-display font-bold text-3xl text-cedine-orange block mb-2">04</span>
+          <h3 class="font-display font-bold text-xl mb-2" data-i18n="pillar_4_t">Incluir</h3>
+          <p class="text-blue-100 text-sm" data-i18n="pillar_4_d">Facilitamos su integración plena en el entorno escolar, familiar y comunitario.</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-14">
+        <a href="programas.html" class="inline-flex items-center gap-2 bg-cedine-blue hover:brightness-110 text-white font-display font-semibold px-8 py-4 rounded-full shadow-md transition" data-i18n="about_next_btn">
+          Conocer Nuestras 4 Terapias →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER COMPACTO ==================== -->
+  <footer class="bg-cedine-blue text-white pt-14 pb-8 px-6 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
+      <div>
+        <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
+        <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-blue-100">
+        <a href="index.html" class="hover:text-cedine-orange transition" data-i18n="nav_home">Inicio</a>
+        <a href="nosotros.html" class="hover:text-cedine-orange transition" data-i18n="nav_about">Nuestra Labor</a>
+        <a href="programas.html" class="hover:text-cedine-orange transition" data-i18n="nav_programs">Terapias e Inclusión</a>
+        <a href="donar.html" class="hover:text-cedine-orange transition" data-i18n="nav_donate">Apoyar Ahora</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
+      <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
+      <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
