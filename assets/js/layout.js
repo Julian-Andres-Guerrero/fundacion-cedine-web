@@ -114,8 +114,8 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-10 border-b border-white/15">
           <div class="space-y-1.5">
             <img src="assets/img/imagotipo-horizontal-blanco-cedine.svg" alt="Fundación CEDINE" class="h-12 w-auto mb-3" />
-            <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula 90047132)</p>
-            <p class="text-blue-200 text-xs">Calle 54 # 75-28 Normandía II Sector • Bogotá D.C.</p>
+            <p class="text-blue-200 text-xs">NIT 900.773.102-4 • Cámara de Comercio de Bogotá (Matrícula S00047132)</p>
+            <p class="text-blue-200 text-xs">Cl 11A No. 35-23 • Bogotá D.C., Colombia</p>
             <p class="text-blue-200 text-xs">Tel: (601) 908 7403 / 317 263 7946 / 312 518 2773 • fundacedine@gmail.com</p>
           </div>
 
