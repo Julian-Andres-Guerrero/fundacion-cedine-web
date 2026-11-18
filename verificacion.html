@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verificación de Cursos | Fundación CEDINE • Bogotá, Colombia</title>
-  <meta name="description" content="Consulta y verificación oficial de asistentes y certificados de cursos de la Fundación CEDINE (NIT 900.773.102-4)." />
+  <title>Verificación de Certificados | Fundación CEDINE • Bogotá, Colombia</title>
+  <meta name="description" content="Portal oficial de verificación de certificados emitidos por la Fundación CEDINE (NIT 900.773.102-4) mediante código único de aprobación." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://fundacioncedine.org/verificacion.html" />
+  <link rel="canonical" href="https://fundacioncedine.org/verificacion" />
   <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,7 +27,9 @@
             cedine: {
               blue: '#1C4B7C',
               green: '#91BE66',
+              'green-dark': '#3D6B1E',
               orange: '#F79638',
+              'orange-dark': '#B85400',
               cream: '#FDFBF7',
             }
           }
@@ -39,77 +41,62 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
 </head>
-<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
+<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange-dark selection:text-white">
 
   <div id="global-header"></div>
 
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
-    <div class="max-w-5xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-green font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="ver_tag">
-        Portal de Transparencia Académica
+    <div class="max-w-4xl mx-auto text-center">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/15 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="ver_tag">
+        Portal de Transparencia Académica • ISO 27001 / Ley 1581
       </span>
       <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-4" data-i18n="ver_title">
-        Base de Datos Asistentes y Verificación de Cursos
+        Verificación Oficial de Certificados
       </h1>
       <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="ver_sub">
-        Valida la autenticidad de las certificaciones emitidas por la Fundación CEDINE buscando por código de verificación, identificación o nombre completo.
+        Por protección de datos personales (Ley 1581 de 2012), la validación se realiza exclusivamente ingresando el código único de aprobación impreso en el certificado.
       </p>
     </div>
   </section>
 
-  <!-- ==================== BUSCADOR Y TABLA RESPONSIVE ==================== -->
+  <!-- ==================== FORMULARIO DE CONSULTA ÚNICA POR CÓDIGO ==================== -->
   <section class="py-16 px-6 bg-white">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-2xl mx-auto">
 
-      <!-- Controles de Búsqueda y Filtro por Grupo -->
-      <div class="bg-cedine-cream rounded-3xl p-6 border border-slate-200/80 mb-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
-        <div class="relative flex-1">
+      <form id="verify-form" class="bg-cedine-cream rounded-3xl p-8 border border-slate-200/80 shadow-sm space-y-5" novalidate>
+        <div>
+          <label for="approval-code" class="block font-display font-bold text-cedine-blue text-base mb-2" data-i18n="ver_input_lbl">
+            Código de Aprobación del Certificado
+          </label>
           <input
             type="text"
-            id="search-cert"
-            placeholder="Buscar por nombre, apellidos, cédula o código de verificación..."
-            class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-cedine-blue shadow-sm"
+            id="approval-code"
+            name="approval-code"
+            required
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Ej: 12082026-08-879609876415"
+            aria-describedby="code-help"
+            class="w-full px-4 py-3.5 rounded-2xl bg-white border-2 border-slate-300 font-mono text-base text-slate-900 focus:outline-none focus:border-cedine-blue focus:ring-2 focus:ring-cedine-blue/30"
           />
-          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <p id="code-help" class="text-xs text-slate-600 mt-2">
+            Ingresa el código alfanumérico exacto sin puntos ni espacios adicionales. No se realizan consultas por nombre ni por número de documento.
+          </p>
         </div>
 
-        <div class="flex flex-wrap gap-2">
-          <button onclick="setGroupFilter('all')" id="btn-grp-all" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-cedine-blue text-white transition">
-            Todos los Registros
-          </button>
-          <button onclick="setGroupFilter('1')" id="btn-grp-1" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition">
-            Verificación Cursos (2025 - 2026)
-          </button>
-          <button onclick="setGroupFilter('2')" id="btn-grp-2" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition">
-            Verificación Cursos (2024)
-          </button>
-        </div>
-      </div>
+        <button
+          type="submit"
+          id="verify-btn"
+          class="w-full bg-cedine-blue hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-cedine-blue/40 text-white font-display font-semibold text-base py-4 px-6 rounded-full shadow-md transition"
+          data-i18n="ver_btn_submit"
+        >
+          Validar Certificado
+        </button>
+      </form>
 
-      <!-- Contador de resultados -->
-      <div class="mb-4 flex items-center justify-between text-xs text-slate-500 px-1">
-        <span id="results-count">Mostrando 24 certificaciones verificadas</span>
-        <span>NIT 900.773.102-4 • Fundación CEDINE</span>
-      </div>
-
-      <!-- Tabla Responsive -->
-      <div class="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-cedine-blue text-white font-display text-xs uppercase tracking-wider">
-              <th class="py-4 px-5">Apellidos y Nombres</th>
-              <th class="py-4 px-5">Identificación</th>
-              <th class="py-4 px-5">Curso</th>
-              <th class="py-4 px-5">Código Verificación</th>
-              <th class="py-4 px-5">Fecha Realización</th>
-            </tr>
-          </thead>
-          <tbody id="cert-table-body" class="divide-y divide-slate-100 text-sm text-slate-700 bg-white">
-            <!-- Renderizado dinámico por JS -->
-          </tbody>
-        </table>
-      </div>
+      <!-- Contenedor de Resultado Único (ARIA Live para lectores de pantalla) -->
+      <div id="verify-result" aria-live="polite" class="mt-8"></div>
 
     </div>
   </section>
@@ -118,105 +105,93 @@
 
   <script src="assets/js/layout.js"></script>
   <script>
-    const certificadosDB = [
-      // GRUPO 1: VERIFICACIÓN CURSOS (2025 - 2026)
-      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '20062025-12-225874585410', fecha: '20/06/2025' },
-      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Curso Básico en Alturas', codigo: '09172025-09-812458741411', fecha: '17/09/2025' },
-      { grupo: '1', nombre: 'LOPEZ GOMEZ NICOL VALENTINA', id: '1.011.091.259 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '19092025-09-582100365412', fecha: '19/09/2025' },
-      { grupo: '1', nombre: 'MORENO PARDO VALENTINA', id: 'T.I. 1.016.954.974 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '19092025-09-852585800413', fecha: '19/09/2025' },
-      { grupo: '1', nombre: 'PARDO MARTINEZ LUZ ADRIANA', id: '20.859.873 De Quipile Cundinamarca', curso: 'Manipulación de Alimentos', codigo: '19092025-09-582100365414', fecha: '19/09/2025' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Manejo Defensivo / Preventivo', codigo: '12082026-08-879609876415', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Primeros Auxilios', codigo: '12082026-08-879689876416', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Mecánica Básica', codigo: '12082026-08-123165789417', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Seguridad Industrial', codigo: '12082026-08-723833345418', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Manejo Extintores y Control Incendios', codigo: '12082026-08-457109297419', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Seguridad Vial', codigo: '12082026-08-768594098420', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Normas de Tránsito', codigo: '12082026-08-876590030421', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Alistamiento Vehicular', codigo: '12082026-08-768779002422', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Curso Básico en Alturas', codigo: '12082026-08-909098763423', fecha: '12/08/2026' },
-      { grupo: '1', nombre: 'MORENO PARDO OSCAR DANIEL', id: '1.010.031.717 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '26082026-08-251478694424', fecha: '29/08/2026' },
-      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '28082026-08-585200125425', fecha: '28/08/2026' },
+    // Configuración del endpoint RPC de Supabase (completar URL y anon key al crear el proyecto)
+    NEXT_PUBLIC_SUPABASE_URL='https://sjfoivxzmaxaevsvjqcv.supabase.co'
+    NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY='sb_publishable_ateiww11CKWirRw0Vamh8g_wOf1vvAB'
 
-      // GRUPO 2: VERIFICACIÓN CURSOS (2024)
-      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '01102024-10-987098098378', fecha: '01/10/2024' },
-      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Mecánica Básica', codigo: '01102024-10-678768876379', fecha: '01/10/2024' },
-      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Normas de Tránsito', codigo: '01102024-10-098098123380', fecha: '01/10/2024' },
-      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Seguridad Vial', codigo: '01102024-10-256654329381', fecha: '01/10/2024' },
-      { grupo: '2', nombre: 'NAPOLEON HERNANDEZ VILLALBA', id: '74.860.429 De Yopal', curso: 'Manejo Defensivo / Preventivo', codigo: '29102024-10-258963277386', fecha: '29/10/2024' },
-      { grupo: '2', nombre: 'JORGE ANTONIO OCHOA REINA', id: '79.531.811 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-102101415382', fecha: '08/11/2024' },
-      { grupo: '2', nombre: 'FABIO ROMERO', id: '8.698.272 De Barranquilla', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-303201555383', fecha: '08/11/2024' },
-      { grupo: '2', nombre: 'AMEDT JAISEDT CALDERON ACERO', id: '1.106.951.990 De Palocabildo', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-585222211385', fecha: '08/11/2024' },
-      { grupo: '2', nombre: 'ERIBERTO RODRIGUEZ RODRIGUEZ', id: '79.913.776 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-998565666384', fecha: '08/11/2024' },
-      { grupo: '2', nombre: 'NAPOLEON HERNANDEZ VILLALBA', id: '74.860.429 De Yopal', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-258963277386', fecha: '08/11/2024' }
-    ];
+    const verifyForm = document.getElementById('verify-form');
+    const codeInput = document.getElementById('approval-code');
+    const resultBox = document.getElementById('verify-result');
+    const submitBtn = document.getElementById('verify-btn');
 
-    const urlParams = new URLSearchParams(window.location.search);
-    let activeGroup = urlParams.get('grupo') || 'all';
-
-    function updateGroupButtons() {
-      ['all', '1', '2'].forEach(g => {
-        const btn = document.getElementById(`btn-grp-${g}`);
-        if (!btn) return;
-        if (activeGroup === g) {
-          btn.className = 'px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-cedine-blue text-white transition';
-        } else {
-          btn.className = 'px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition';
-        }
-      });
+    function renderMessage(type, title, bodyHtml) {
+      const styles = {
+        valid: 'bg-emerald-50 border-cedine-green-dark text-slate-800',
+        invalid: 'bg-amber-50 border-cedine-orange-dark text-slate-800',
+        error: 'bg-slate-100 border-cedine-blue text-slate-800'
+      };
+      resultBox.innerHTML = `
+        <div class="rounded-3xl p-7 border-l-8 shadow-sm ${styles[type]}">
+          <h2 class="font-display font-bold text-xl text-cedine-blue mb-2">${title}</h2>
+          <div class="text-sm leading-relaxed space-y-1.5">${bodyHtml}</div>
+        </div>
+      `;
     }
 
-    function setGroupFilter(grp) {
-      activeGroup = grp;
-      updateGroupButtons();
-      renderCertTable();
-    }
+    verifyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const rawCode = codeInput.value.trim().replace(/\.+$/, '');
 
-    function renderCertTable() {
-      const query = (document.getElementById('search-cert').value || '').toLowerCase().trim();
-      const tbody = document.getElementById('cert-table-body');
-      const countLabel = document.getElementById('results-count');
-
-      const filtered = certificadosDB.filter(item => {
-        const matchGroup = activeGroup === 'all' || item.grupo === activeGroup;
-        const matchText = !query ||
-          item.nombre.toLowerCase().includes(query) ||
-          item.id.toLowerCase().includes(query) ||
-          item.curso.toLowerCase().includes(query) ||
-          item.codigo.toLowerCase().includes(query);
-        return matchGroup && matchText;
-      });
-
-      countLabel.textContent = `Mostrando ${filtered.length} certificación(es) verificada(s)`;
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="5" class="py-10 px-6 text-center text-slate-500">
-              No se encontraron certificados con ese criterio de búsqueda. Verifica el número de identificación o el código.
-            </td>
-          </tr>
-        `;
+      if (!rawCode || rawCode.length < 8) {
+        renderMessage('invalid', 'Código incompleto', '<p>Por favor ingresa el código de aprobación completo tal como figura en el certificado.</p>');
+        codeInput.focus();
         return;
       }
 
-      tbody.innerHTML = filtered.map(row => `
-        <tr class="hover:bg-cedine-cream/70 transition-colors">
-          <td class="py-3.5 px-5 font-semibold text-cedine-blue">${row.nombre}</td>
-          <td class="py-3.5 px-5 whitespace-nowrap">${row.id}</td>
-          <td class="py-3.5 px-5">
-            <span class="inline-block px-2.5 py-1 rounded-lg bg-cedine-green/15 text-cedine-blue font-medium text-xs">
-              ${row.curso}
-            </span>
-          </td>
-          <td class="py-3.5 px-5 font-mono text-xs font-semibold text-slate-800 whitespace-nowrap">${row.codigo}</td>
-          <td class="py-3.5 px-5 whitespace-nowrap text-slate-600">${row.fecha}</td>
-        </tr>
-      `).join('');
-    }
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+        renderMessage(
+          'error',
+          'Servicio de validación en sincronización',
+          '<p>El motor de consulta cifrada del servidor está finalizando su activación. Para verificación inmediata de autenticidad, comuníquese con la Fundación CEDINE al WhatsApp <strong>+57 312 518 2773</strong> o al correo <strong>fundacedine@gmail.com</strong> indicando el código <code>' + rawCode.replace(/[<>&"']/g, '') + '</code>.</p>'
+        );
+        return;
+      }
 
-    document.getElementById('search-cert').addEventListener('input', renderCertTable);
-    updateGroupButtons();
-    renderCertTable();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Consultando servidor...';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/verificar_certificado_por_codigo`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify({ p_codigo: rawCode })
+        });
+
+        if (!res.ok) throw new Error('Error en servidor');
+        const data = await res.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+          renderMessage(
+            'invalid',
+            'Certificado no encontrado',
+            '<p>No existe un registro activo asociado al código ingresado. Verifica que no contenga errores de digitación.</p>'
+          );
+        } else {
+          const cert = data[0];
+          renderMessage(
+            'valid',
+            '✓ Certificado Auténtico y Verificado',
+            `
+              <p><strong>Titular:</strong> ${cert.nombre_completo}</p>
+              <p><strong>Identificación:</strong> ${cert.identificacion_enmascarada}</p>
+              <p><strong>Programa / Curso:</strong> ${cert.curso}</p>
+              <p><strong>Código de Aprobación:</strong> <span class="font-mono font-semibold">${cert.codigo_verificacion}</span></p>
+              <p><strong>Fecha de Realización:</strong> ${cert.fecha_realizacion}</p>
+              <p class="pt-2 text-xs text-slate-600">Emitido por Fundación Centro de Diagnóstico de Necesidades Educativas (CEDINE) • NIT 900.773.102-4.</p>
+            `
+          );
+        }
+      } catch (err) {
+        renderMessage('error', 'No fue posible conectar con el servidor', '<p>Intenta nuevamente en unos segundos o contáctanos a fundacedine@gmail.com.</p>');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Validar Certificado';
+      }
+    });
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="assets/js/i18n.js"></script>
