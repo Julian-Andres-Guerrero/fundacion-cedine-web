@@ -109,10 +109,16 @@
     NEXT_PUBLIC_SUPABASE_URL='https://sjfoivxzmaxaevsvjqcv.supabase.co'
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY='sb_publishable_ateiww11CKWirRw0Vamh8g_wOf1vvAB'
 
-    const verifyForm = document.getElementById('verify-form');
+const verifyForm = document.getElementById('verify-form');
     const codeInput = document.getElementById('approval-code');
     const resultBox = document.getElementById('verify-result');
     const submitBtn = document.getElementById('verify-btn');
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, (m) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[m]));
+    }
 
     function renderMessage(type, title, bodyHtml) {
       const styles = {
@@ -138,15 +144,6 @@
         return;
       }
 
-      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-        renderMessage(
-          'error',
-          'Servicio de validación en sincronización',
-          '<p>El motor de consulta cifrada del servidor está finalizando su activación. Para verificación inmediata de autenticidad, comuníquese con la Fundación CEDINE al WhatsApp <strong>+57 312 518 2773</strong> o al correo <strong>fundacedine@gmail.com</strong> indicando el código <code>' + rawCode.replace(/[<>&"']/g, '') + '</code>.</p>'
-        );
-        return;
-      }
-
       submitBtn.disabled = true;
       submitBtn.textContent = 'Consultando servidor...';
 
@@ -155,14 +152,22 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            'apikey': SUPABASE_ANON_KEY
           },
           body: JSON.stringify({ p_codigo: rawCode })
         });
 
-        if (!res.ok) throw new Error('Error en servidor');
         const data = await res.json();
+
+        if (!res.ok) {
+          console.error('Error Supabase RPC:', data);
+          renderMessage(
+            'error',
+            'Error de comunicación con la base de datos',
+            `<p>Detalle técnico: <code>${escapeHtml(data.message || res.statusText)}</code>. Verifica que la función RPC esté creada en Supabase.</p>`
+          );
+          return;
+        }
 
         if (!Array.isArray(data) || data.length === 0) {
           renderMessage(
@@ -176,17 +181,18 @@
             'valid',
             '✓ Certificado Auténtico y Verificado',
             `
-              <p><strong>Titular:</strong> ${cert.nombre_completo}</p>
-              <p><strong>Identificación:</strong> ${cert.identificacion_enmascarada}</p>
-              <p><strong>Programa / Curso:</strong> ${cert.curso}</p>
-              <p><strong>Código de Aprobación:</strong> <span class="font-mono font-semibold">${cert.codigo_verificacion}</span></p>
-              <p><strong>Fecha de Realización:</strong> ${cert.fecha_realizacion}</p>
+              <p><strong>Titular:</strong> ${escapeHtml(cert.nombre_completo)}</p>
+              <p><strong>Identificación:</strong> ${escapeHtml(cert.identificacion_enmascarada)}</p>
+              <p><strong>Programa / Curso:</strong> ${escapeHtml(cert.curso)}</p>
+              <p><strong>Código de Aprobación:</strong> <span class="font-mono font-semibold">${escapeHtml(cert.codigo_verificacion)}</span></p>
+              <p><strong>Fecha de Realización:</strong> ${escapeHtml(cert.fecha_realizacion)}</p>
               <p class="pt-2 text-xs text-slate-600">Emitido por Fundación Centro de Diagnóstico de Necesidades Educativas (CEDINE) • NIT 900.773.102-4.</p>
             `
           );
         }
       } catch (err) {
-        renderMessage('error', 'No fue posible conectar con el servidor', '<p>Intenta nuevamente en unos segundos o contáctanos a fundacedine@gmail.com.</p>');
+        console.error(err);
+        renderMessage('error', 'No fue posible conectar con el servidor', '<p>Revisa tu conexión o la política CSP en _headers.</p>');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Validar Certificado';
