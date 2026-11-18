@@ -1,0 +1,67 @@
+:root {
+  --cedine-blue: #1C4B7C;
+  --cedine-green: #91BE66;
+  --cedine-orange: #F79638;
+  --cedine-cream: #FDFBF7;
+}
+
+/* Suavizado general y tipografía */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* ==================== SISTEMA PARALLAX MODERNO ==================== */
+.parallax-bg {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform: translate3d(0, 0, 0) scale(1.12); /* Escala ligera para evitar bordes vacíos al moverse */
+  transition: transform 0.08s linear;
+}
+
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* En dispositivos táctiles / iOS optimizamos el rendimiento */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-bg,
+  .parallax-layer {
+    transform: none !important;
+  }
+}
+
+/* ==================== DETALLES VISUALES DE MARCA ==================== */
+/* Barra de desplazamiento personalizada con colores CEDINE */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cedine-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cedine-blue);
+  border-radius: 9999px;
+  border: 2px solid var(--cedine-cream);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cedine-orange);
+}
+
+/* Efecto sutil de elevación en tarjetas */
+article {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+
+article:hover {
+  transform: translateY(-6px);
+}
