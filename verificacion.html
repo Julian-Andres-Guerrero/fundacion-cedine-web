@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificación de Cursos | Fundación CEDINE • Bogotá, Colombia</title>
+  <meta name="description" content="Consulta y verificación oficial de asistentes y certificados de cursos de la Fundación CEDINE (NIT 900.773.102-4)." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://fundacioncedine.org/verificacion.html" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/isotipo-cedine.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
+            display: ['Fredoka', 'sans-serif'],
+            playful: ['Baloo 2', 'cursive'],
+          },
+          colors: {
+            cedine: {
+              blue: '#1C4B7C',
+              green: '#91BE66',
+              orange: '#F79638',
+              cream: '#FDFBF7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/custom.css" />
+</head>
+<body class="bg-cedine-cream text-slate-800 antialiased overflow-x-hidden selection:bg-cedine-orange selection:text-white">
+
+  <div id="global-header"></div>
+
+  <!-- ==================== CABECERA ==================== -->
+  <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
+    <div class="max-w-5xl mx-auto text-center">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-green font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="ver_tag">
+        Portal de Transparencia Académica
+      </span>
+      <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-4" data-i18n="ver_title">
+        Base de Datos Asistentes y Verificación de Cursos
+      </h1>
+      <p data-aos="fade-up" data-aos-delay="100" class="text-blue-100 text-base sm:text-lg max-w-2xl mx-auto" data-i18n="ver_sub">
+        Valida la autenticidad de las certificaciones emitidas por la Fundación CEDINE buscando por código de verificación, identificación o nombre completo.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== BUSCADOR Y TABLA RESPONSIVE ==================== -->
+  <section class="py-16 px-6 bg-white">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- Controles de Búsqueda y Filtro por Grupo -->
+      <div class="bg-cedine-cream rounded-3xl p-6 border border-slate-200/80 mb-8 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+        <div class="relative flex-1">
+          <input
+            type="text"
+            id="search-cert"
+            placeholder="Buscar por nombre, apellidos, cédula o código de verificación..."
+            class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-cedine-blue shadow-sm"
+          />
+          <svg class="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setGroupFilter('all')" id="btn-grp-all" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-cedine-blue text-white transition">
+            Todos los Registros
+          </button>
+          <button onclick="setGroupFilter('1')" id="btn-grp-1" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition">
+            Verificación Cursos (2025 - 2026)
+          </button>
+          <button onclick="setGroupFilter('2')" id="btn-grp-2" class="px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition">
+            Verificación Cursos (2024)
+          </button>
+        </div>
+      </div>
+
+      <!-- Contador de resultados -->
+      <div class="mb-4 flex items-center justify-between text-xs text-slate-500 px-1">
+        <span id="results-count">Mostrando 24 certificaciones verificadas</span>
+        <span>NIT 900.773.102-4 • Fundación CEDINE</span>
+      </div>
+
+      <!-- Tabla Responsive -->
+      <div class="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-cedine-blue text-white font-display text-xs uppercase tracking-wider">
+              <th class="py-4 px-5">Apellidos y Nombres</th>
+              <th class="py-4 px-5">Identificación</th>
+              <th class="py-4 px-5">Curso</th>
+              <th class="py-4 px-5">Código Verificación</th>
+              <th class="py-4 px-5">Fecha Realización</th>
+            </tr>
+          </thead>
+          <tbody id="cert-table-body" class="divide-y divide-slate-100 text-sm text-slate-700 bg-white">
+            <!-- Renderizado dinámico por JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="global-footer"></div>
+
+  <script src="assets/js/layout.js"></script>
+  <script>
+    const certificadosDB = [
+      // GRUPO 1: VERIFICACIÓN CURSOS (2025 - 2026)
+      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '20062025-12-225874585410', fecha: '20/06/2025' },
+      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Curso Básico en Alturas', codigo: '09172025-09-812458741411', fecha: '17/09/2025' },
+      { grupo: '1', nombre: 'LOPEZ GOMEZ NICOL VALENTINA', id: '1.011.091.259 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '19092025-09-582100365412', fecha: '19/09/2025' },
+      { grupo: '1', nombre: 'MORENO PARDO VALENTINA', id: 'T.I. 1.016.954.974 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '19092025-09-852585800413', fecha: '19/09/2025' },
+      { grupo: '1', nombre: 'PARDO MARTINEZ LUZ ADRIANA', id: '20.859.873 De Quipile Cundinamarca', curso: 'Manipulación de Alimentos', codigo: '19092025-09-582100365414', fecha: '19/09/2025' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Manejo Defensivo / Preventivo', codigo: '12082026-08-879609876415', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Primeros Auxilios', codigo: '12082026-08-879689876416', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Mecánica Básica', codigo: '12082026-08-123165789417', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Seguridad Industrial', codigo: '12082026-08-723833345418', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Manejo Extintores y Control Incendios', codigo: '12082026-08-457109297419', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Seguridad Vial', codigo: '12082026-08-768594098420', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Normas de Tránsito', codigo: '12082026-08-876590030421', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Alistamiento Vehicular', codigo: '12082026-08-768779002422', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MARIN AYALA JORGE ENRIQUE', id: '79.259.617 De Bogotá', curso: 'Curso Básico en Alturas', codigo: '12082026-08-909098763423', fecha: '12/08/2026' },
+      { grupo: '1', nombre: 'MORENO PARDO OSCAR DANIEL', id: '1.010.031.717 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '26082026-08-251478694424', fecha: '29/08/2026' },
+      { grupo: '1', nombre: 'PARDO MARTINEZ MARIO ALEXANDER', id: '79.864.200 De Bogotá', curso: 'Manipulación de Alimentos', codigo: '28082026-08-585200125425', fecha: '28/08/2026' },
+
+      // GRUPO 2: VERIFICACIÓN CURSOS (2024)
+      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '01102024-10-987098098378', fecha: '01/10/2024' },
+      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Mecánica Básica', codigo: '01102024-10-678768876379', fecha: '01/10/2024' },
+      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Normas de Tránsito', codigo: '01102024-10-098098123380', fecha: '01/10/2024' },
+      { grupo: '2', nombre: 'JOHN ALEXANDER CLAVIJO BOCANEGRA', id: '1.023.863.167 De Bogotá D.C.', curso: 'Seguridad Vial', codigo: '01102024-10-256654329381', fecha: '01/10/2024' },
+      { grupo: '2', nombre: 'NAPOLEON HERNANDEZ VILLALBA', id: '74.860.429 De Yopal', curso: 'Manejo Defensivo / Preventivo', codigo: '29102024-10-258963277386', fecha: '29/10/2024' },
+      { grupo: '2', nombre: 'JORGE ANTONIO OCHOA REINA', id: '79.531.811 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-102101415382', fecha: '08/11/2024' },
+      { grupo: '2', nombre: 'FABIO ROMERO', id: '8.698.272 De Barranquilla', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-303201555383', fecha: '08/11/2024' },
+      { grupo: '2', nombre: 'AMEDT JAISEDT CALDERON ACERO', id: '1.106.951.990 De Palocabildo', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-585222211385', fecha: '08/11/2024' },
+      { grupo: '2', nombre: 'ERIBERTO RODRIGUEZ RODRIGUEZ', id: '79.913.776 De Bogotá D.C.', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-998565666384', fecha: '08/11/2024' },
+      { grupo: '2', nombre: 'NAPOLEON HERNANDEZ VILLALBA', id: '74.860.429 De Yopal', curso: 'Manejo Defensivo / Preventivo', codigo: '08112024-11-258963277386', fecha: '08/11/2024' }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let activeGroup = urlParams.get('grupo') || 'all';
+
+    function updateGroupButtons() {
+      ['all', '1', '2'].forEach(g => {
+        const btn = document.getElementById(`btn-grp-${g}`);
+        if (!btn) return;
+        if (activeGroup === g) {
+          btn.className = 'px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-cedine-blue text-white transition';
+        } else {
+          btn.className = 'px-4 py-2.5 rounded-xl font-display font-semibold text-xs bg-white text-cedine-blue border border-slate-200 hover:border-cedine-blue transition';
+        }
+      });
+    }
+
+    function setGroupFilter(grp) {
+      activeGroup = grp;
+      updateGroupButtons();
+      renderCertTable();
+    }
+
+    function renderCertTable() {
+      const query = (document.getElementById('search-cert').value || '').toLowerCase().trim();
+      const tbody = document.getElementById('cert-table-body');
+      const countLabel = document.getElementById('results-count');
+
+      const filtered = certificadosDB.filter(item => {
+        const matchGroup = activeGroup === 'all' || item.grupo === activeGroup;
+        const matchText = !query ||
+          item.nombre.toLowerCase().includes(query) ||
+          item.id.toLowerCase().includes(query) ||
+          item.curso.toLowerCase().includes(query) ||
+          item.codigo.toLowerCase().includes(query);
+        return matchGroup && matchText;
+      });
+
+      countLabel.textContent = `Mostrando ${filtered.length} certificación(es) verificada(s)`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-10 px-6 text-center text-slate-500">
+              No se encontraron certificados con ese criterio de búsqueda. Verifica el número de identificación o el código.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(row => `
+        <tr class="hover:bg-cedine-cream/70 transition-colors">
+          <td class="py-3.5 px-5 font-semibold text-cedine-blue">${row.nombre}</td>
+          <td class="py-3.5 px-5 whitespace-nowrap">${row.id}</td>
+          <td class="py-3.5 px-5">
+            <span class="inline-block px-2.5 py-1 rounded-lg bg-cedine-green/15 text-cedine-blue font-medium text-xs">
+              ${row.curso}
+            </span>
+          </td>
+          <td class="py-3.5 px-5 font-mono text-xs font-semibold text-slate-800 whitespace-nowrap">${row.codigo}</td>
+          <td class="py-3.5 px-5 whitespace-nowrap text-slate-600">${row.fecha}</td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('search-cert').addEventListener('input', renderCertTable);
+    updateGroupButtons();
+    renderCertTable();
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
