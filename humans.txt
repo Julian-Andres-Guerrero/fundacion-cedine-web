@@ -1,0 +1,11 @@
+/* TEAM */
+Developer & Systems Engineer: Julian Andres Guerrero Vasquez
+GitHub: https://github.com/Julian-Andres-Guerrero
+Location: Hollywood, FL / Bogotá, Colombia
+
+/* SITE */
+Organization: Fundación CEDINE
+Domain: https://fundacioncedine.org
+Standards: HTML5, Tailwind CSS, JavaScript ES6+, SwiperJS, Schema.org
+Hosting: Cloudflare Pages
+Last update: 2026/11/18

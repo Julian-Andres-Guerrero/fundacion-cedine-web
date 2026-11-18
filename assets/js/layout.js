@@ -57,7 +57,16 @@
               Apoyar Ahora
             </a>
           </div>
-
+<div class="max-w-7xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-blue-200 gap-3">
+          <p>© 2026 Fundación CEDINE • Bogotá, Colombia.</p>
+          <p class="font-playful text-base text-cedine-orange">“Cuestión de actitud”</p>
+          <p class="text-blue-200/80">
+            <span data-i18n="footer_dev_by">Desarrollado por</span>
+            <a href="https://github.com/Julian-Andres-Guerrero" target="_blank" rel="noopener noreferrer" class="text-white font-semibold hover:text-cedine-orange underline decoration-cedine-orange/50 transition">
+              Julian Andres Guerrero Vasquez
+            </a>
+          </p>
+        </div>
           <!-- Controles Móviles -->
           <div class="flex items-center gap-3 lg:hidden">
             <button id="lang-toggle-mobile" class="px-3 py-1.5 rounded-lg border border-cedine-blue/30 text-xs font-display font-bold text-cedine-blue">ES</button>
