@@ -142,6 +142,8 @@
             <a href="/politica-de-cookies" class="hover:text-cedine-orange underline underline-offset-4 transition">Política de Cookies</a>
             <span aria-hidden="true">·</span>
             <a href="/terminos" class="hover:text-cedine-orange underline underline-offset-4 transition">Términos y Condiciones</a>
+            <span aria-hidden="true">·</span>
+            <button type="button" data-cookie-settings class="hover:text-cedine-orange underline underline-offset-4 transition">Configurar cookies</button>
           </div>
           <p class="text-blue-100 text-center sm:text-right">
             FUNDACIÓN CENTRO DE DIAGNÓSTICO DE NECESIDADES EDUCATIVAS · NIT 900.773.102-4 · © 2026
@@ -160,4 +162,13 @@
       </footer>
     `;
   }
+})();
+
+// Consentimiento de cookies (Ley 1581 + Google Consent Mode v2) en todas las páginas
+(function cargarConsentimientoCookies() {
+  if (window.CedineCookies || document.getElementById('cedine-cookies-js')) return;
+  var s = document.createElement('script');
+  s.id = 'cedine-cookies-js';
+  s.src = '/assets/js/cookies.js?v=1';
+  document.head.appendChild(s);
 })();

@@ -1,20 +1,19 @@
--e ".DS_Store\nThumbs.db\n.vscode/\n*.log" 
-"assets/img/*.pdf" 
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+node_modules/
 
-# Carpetas multimedia originales sin renombrar y PDF maestro
-assets/img/FOTOS FUNDACION/
-assets/img/PROPAGANDA/
-assets/img/*.pdf
-assets/img/FOTOS FUNDACION/
-assets/img/PROPAGANDA/
-assets/img/*.pdf
+# Documentos internos (NO publicar: borradores Word, informe de requerimientos, ZIP)
+assets/politicas/
+
+# Material original sin optimizar
 assets/img/FOTOS FUNDACION/
 assets/img/PROPAGANDA/
 assets/img/*.pdf
 
-# Ignorar videos pesados (>25MB limit en Cloudflare Pages)
+# Videos pesados (Cloudflare Pages no acepta archivos de más de 25 MB)
 *.mp4
 assets/media/videos/
 assets/media/promo/
-assets/img/FOTOS FUNDACION/
-assets/img/PROPAGANDA/
