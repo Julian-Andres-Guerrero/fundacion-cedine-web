@@ -6,14 +6,16 @@
  * - La decisión se guarda 6 meses; luego se vuelve a preguntar.
  * - Cualquier enlace o botón con  data-cookie-settings  abre el panel de preferencias.
  *
- * CONFIGURACIÓN: reemplaza G-XXXXXXXXXX por el ID de medición de tu propiedad GA4
- * (Google Analytics → Administrar → Flujos de datos → Web → ID de medición).
+ * CONFIGURACIÓN: etiquetaGoogle es el ID de la etiqueta de Google (GTM-..., GT-... o G-...).
+ * NO pegues el fragmento de Google en el <head> de las páginas: este archivo lo carga
+ * solo después de que el visitante acepta, como exige la Ley 1581.
  */
 (function () {
   'use strict';
 
   var CONFIG = {
-    ga4Id: 'G-XXXXXXXXXX',          // <-- tu ID de medición de Google Analytics 4
+    etiquetaGoogle: 'GTM-NQVXZXPK', // etiqueta de Google de la Fundación (incluye Google Analytics 4)
+    ga4Id: '',                      // opcional: solo si Google te pide configurar también un G-...
     googleAdsId: '',                // opcional, p. ej. 'AW-123456789' (conversiones de Ad Grants)
     clave: 'cedine_consent',
     version: 1,                     // súbelo si cambias las categorías: se vuelve a preguntar
@@ -21,7 +23,7 @@
     urlPolitica: '/politica-de-cookies'
   };
 
-  var gaConfigurado = /^G-[A-Z0-9]{6,}$/.test(CONFIG.ga4Id) && CONFIG.ga4Id !== 'G-XXXXXXXXXX';
+  var gaConfigurado = /^(G|GT|GTM|AW)-[A-Z0-9]{6,}$/.test(CONFIG.etiquetaGoogle);
 
   // -------------------------------------------------------------------------
   // 1. Consent Mode v2: todo denegado por defecto (antes de cargar cualquier etiqueta de Google)
@@ -70,10 +72,11 @@
     gaCargado = true;
     var s = document.createElement('script');
     s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.ga4Id);
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.etiquetaGoogle);
     document.head.appendChild(s);
     gtag('js', new Date());
-    gtag('config', CONFIG.ga4Id, { anonymize_ip: true });
+    if (/^G-/.test(CONFIG.etiquetaGoogle)) gtag('config', CONFIG.etiquetaGoogle);
+    if (CONFIG.ga4Id) gtag('config', CONFIG.ga4Id);
     if (CONFIG.googleAdsId) gtag('config', CONFIG.googleAdsId);
   }
 
