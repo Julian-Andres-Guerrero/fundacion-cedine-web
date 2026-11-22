@@ -37,6 +37,14 @@ function config(env) {
   if (!url || !secreta || !publica) {
     throw new Error('Faltan variables de entorno en Cloudflare (Production): '+[!url&&'SUPABASE_URL',!publica&&'SUPABASE_PUBLISHABLE_KEY',!secreta&&'SUPABASE_SECRET_KEY'].filter(Boolean).join(', ')+'. Después de agregarlas vuelve a publicar (Deployments → Retry deployment).');
   }
+  // Detecta si en SUPABASE_SECRET_KEY quedó una llave pública por error
+  let rolJwt = '';
+  if (secreta.startsWith('eyJ')) {
+    try { rolJwt = JSON.parse(atob(secreta.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).role || ''; } catch (e) {}
+  }
+  if (secreta.startsWith('sb_publishable_') || secreta === publica || rolJwt === 'anon') {
+    throw new Error('La variable SUPABASE_SECRET_KEY de Cloudflare tiene una llave PÚBLICA. Debe ser la llave secreta (sb_secret_...) de Supabase → Project Settings → API Keys → Secret keys. Cámbiala y vuelve a publicar.');
+  }
   return { url, secreta, publica };
 }
 
