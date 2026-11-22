@@ -31,11 +31,11 @@ function json(data, status = 200) {
 }
 
 function config(env) {
-  const url = (env.SUPABASE_URL || '').replace(/\/$/, '');
+  const url = (env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
   const secreta = env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY || '';
-  const publica = env.SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_ANON_KEY || '';
+  const publica = env.SUPABASE_PUBLISHABLE_KEY || env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_ANON_KEY || '';
   if (!url || !secreta || !publica) {
-    throw new Error('Faltan variables de entorno en Cloudflare: SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY y SUPABASE_SECRET_KEY.');
+    throw new Error('Faltan variables de entorno en Cloudflare (Production): '+[!url&&'SUPABASE_URL',!publica&&'SUPABASE_PUBLISHABLE_KEY',!secreta&&'SUPABASE_SECRET_KEY'].filter(Boolean).join(', ')+'. Después de agregarlas vuelve a publicar (Deployments → Retry deployment).');
   }
   return { url, secreta, publica };
 }

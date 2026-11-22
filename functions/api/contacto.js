@@ -42,7 +42,7 @@ function origenPermitido(request) {
 }
 
 export async function onRequestPost({ request, env, waitUntil }) {
-  const url = (env.SUPABASE_URL || '').replace(/\/$/, '');
+  const url = (env.SUPABASE_URL || env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '');
   const secreta = env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY || '';
   if (!url || !secreta) return json({ error: 'El formulario no está configurado todavía.' }, 503);
   if (!origenPermitido(request)) return json({ error: 'Solicitud no permitida.' }, 403);
