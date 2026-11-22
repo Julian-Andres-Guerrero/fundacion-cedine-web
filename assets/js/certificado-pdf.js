@@ -17,10 +17,10 @@
   // ---------------------------------------------------------------------------
   var VERSION = '5';
   var CFG = {
-    plantilla: 'assets/img/plantilla-certificado-base.jpg?v=' + VERSION,
+    plantilla: '/assets/img/plantilla-certificado-base.jpg?v=' + VERSION,
     fuentes: {
-      normal: 'assets/fonts/Carlito-Regular.ttf?v=' + VERSION,
-      bold: 'assets/fonts/Carlito-Bold.ttf?v=' + VERSION
+      normal: '/assets/fonts/Carlito-Regular.ttf?v=' + VERSION,
+      bold: '/assets/fonts/Carlito-Bold.ttf?v=' + VERSION
     },
     // Página 4:3 idéntica a la diapositiva original (10 x 7.5 pulgadas)
     pagina: { w: 254, h: 190.5 },
@@ -31,7 +31,6 @@
     },
     ciudad: 'Bogotá D.C.',
     lugarExpedicionDefecto: 'Bogotá',
-    urlVerificacion: 'fundacioncedine.org/verificacion',
     timeoutMs: 20000
   };
 
@@ -66,13 +65,23 @@
     return limpio(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase();
   }
 
-  function prefijoCurso(curso) {
-    var clave = sinTildes(curso);
-    for (var i = 0; i < PREFIJO_POR_CURSO.length; i++) {
-      if (clave.indexOf(PREFIJO_POR_CURSO[i].contiene) !== -1) return PREFIJO_POR_CURSO[i].prefijo;
+  // "Curso Básico en Alturas" -> { prefijo: 'curso básico de', nombre: 'ALTURAS' }
+  // "Primeros Auxilios"        -> { prefijo: 'curso de',        nombre: 'PRIMEROS AUXILIOS' }
+  function fraseCurso(curso) {
+    var raw = limpio(curso);
+    var m = raw.match(/^curso\s+((?:b[aá]sico|avanzado|intermedio|te[oó]rico[- ]pr[aá]ctico|de\s+actualizaci[oó]n|de\s+profundizaci[oó]n)\s+)?(?:en|de|sobre)\s+(.+)$/i);
+    if (m) {
+      return { prefijo: 'curso ' + (m[1] ? m[1].trim().toLowerCase() + ' ' : '') + 'de', nombre: m[2].toUpperCase() };
     }
-    return PREFIJO_DEFECTO;
+    m = raw.match(/^curso\s+(.+)$/i);
+    if (m) raw = m[1];
+    var clave = sinTildes(raw);
+    for (var i = 0; i < PREFIJO_POR_CURSO.length; i++) {
+      if (clave.indexOf(PREFIJO_POR_CURSO[i].contiene) !== -1) return { prefijo: PREFIJO_POR_CURSO[i].prefijo, nombre: raw.toUpperCase() };
+    }
+    return { prefijo: PREFIJO_DEFECTO, nombre: raw.toUpperCase() };
   }
+  function prefijoCurso(curso) { return fraseCurso(curso).prefijo; }
 
   function formatearMiles(digitos) {
     return digitos.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -272,7 +281,7 @@
       subject: 'Certificado de asistencia: ' + curso + (intensidad ? ' (' + intensidad + ')' : ''),
       author: 'Fundación Centro de Diagnóstico de Necesidades Educativas - CEDINE (NIT 900.773.102-4)',
       keywords: 'CEDINE, certificado, ' + codigo,
-      creator: 'Fundación CEDINE · ' + CFG.urlVerificacion
+      creator: 'Fundación CEDINE · fundacioncedine.org'
     });
 
     // 1. Plantilla limpia (logos, marca de agua, firmas, sellos, pie)
@@ -295,14 +304,24 @@
     });
 
     // 4. Curso + intensidad (curso en negrita) y código de aprobación en la línea siguiente
-    var segCurso = ['Asistió al ' + prefijoCurso(curso) + ' ', { t: curso, b: true }];
-    segCurso.push(intensidad ? ', con una intensidad de ' + intensidad + '.' : '.');
+    var segCurso;
+    if (cert.tipo === 'participacion') {
+      // CER-001: certificado de participación en actividades o programas
+      segCurso = ['Participó en ', { t: curso, b: true }];
+      if (cert.lugar) segCurso.push(', realizado en ' + limpio(cert.lugar));
+      if (cert.fecha_actividad_texto) segCurso.push(', el ' + cert.fecha_actividad_texto);
+      segCurso.push(intensidad ? ', con una intensidad de ' + intensidad + '.' : '.');
+    } else {
+      var fc = fraseCurso(cert.curso);
+      segCurso = ['Asistió al ' + fc.prefijo + ' ', { t: fc.nombre, b: true }];
+      segCurso.push(intensidad ? ', con una intensidad de ' + intensidad + '.' : '.');
+    }
     var yCodigo = dibujarParrafo(doc, tipo, {
       segmentos: segCurso,
       puntos: 13.5, cx: cx, y: 109.7, anchoMax: 203, interlineado: 6.42, color: CFG.color.texto
     });
     dibujarParrafo(doc, tipo, {
-      segmentos: ['Cód. Aprobación: ' + codigo + '.'],
+      segmentos: [(cert.tipo === 'participacion' ? 'Consecutivo: ' : 'Cód. Aprobación: ') + codigo + '.'],
       puntos: 13.5, cx: cx, y: yCodigo, anchoMax: 203, interlineado: 6.42, color: CFG.color.texto
     });
 
@@ -323,8 +342,13 @@
     // 6. Línea de control (texto pequeño a la derecha, a la altura de "LEY 1503 DE 2011")
     tipo.usar(false, 7);
     doc.setTextColor.apply(doc, CFG.color.gris);
-    doc.text('Verifique su autenticidad en ' + CFG.urlVerificacion, W - 14, 168.6, { align: 'right' });
-    doc.text('Código: ' + codigo, W - 14, 172.0, { align: 'right' });
+    if (cert.tipo === 'participacion') {
+      doc.text('Formato CER-001 · Versión ' + (cert.version_formato || '01'), W - 14, 168.6, { align: 'right' });
+      doc.text('Consecutivo: ' + codigo, W - 14, 172.0, { align: 'right' });
+    } else {
+      doc.text('Certificado registrado en el sistema de la Fundación CEDINE', W - 14, 168.6, { align: 'right' });
+      doc.text('Código: ' + codigo, W - 14, 172.0, { align: 'right' });
+    }
 
     return doc;
   }
@@ -362,6 +386,8 @@
     construirPDF: construirPDF,
     fechaLegible: fechaLegible,
     normalizarIntensidad: normalizarIntensidad,
-    _interno: { parsearIdentificacion: parsearIdentificacion, parsearFecha: parsearFecha, prefijoCurso: prefijoCurso, componerLineas: componerLineas }
+    _interno: { parsearIdentificacion: parsearIdentificacion, parsearFecha: parsearFecha, prefijoCurso: prefijoCurso, fraseCurso: fraseCurso, componerLineas: componerLineas },
+    generarBlob: function (cert) { return precargar().then(function (r) { return construirPDF(cert, r).output('blob'); }); },
+    nombreArchivo: nombreArchivo
   };
 })();

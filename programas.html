@@ -14,28 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-            display: ['Fredoka', 'sans-serif'],
-            playful: ['Baloo 2', 'cursive'],
-          },
-          colors: {
-            cedine: {
-              blue: '#1C4B7C',
-              green: '#91BE66',
-              orange: '#F79638',
-              cream: '#FDFBF7',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1" />
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
@@ -47,7 +26,7 @@
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-16 px-6 bg-cedine-blue text-white">
     <div class="max-w-5xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-green font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="prog_tag">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-green-light font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="prog_tag">
         Nuestras Líneas de Acción
       </span>
       <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5" data-i18n="prog_title">
@@ -94,7 +73,7 @@
           </p>
         </div>
         <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
-          <h3 class="font-display font-semibold text-sm text-cedine-green uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <h3 class="font-display font-semibold text-sm text-cedine-green-dark uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
           <ul class="space-y-2 text-sm text-slate-600">
             <li data-i18n="prog_2_b1">• Reducción de ansiedad y bloqueo emocional</li>
             <li data-i18n="prog_2_b2">• Estímulo de la comunicación y empatía</li>
@@ -105,7 +84,7 @@
 
       <article data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-orange shadow-sm grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-8">
-          <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange text-xs font-display font-semibold mb-3" data-i18n="prog_3_badge">Desarrollo Físico</span>
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange-deep text-xs font-display font-semibold mb-3" data-i18n="prog_3_badge">Desarrollo Físico</span>
           <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-4" data-i18n="prog_3_title">
             3. Terapia Motriz y Sensorial al Aire Libre
           </h2>
@@ -114,7 +93,7 @@
           </p>
         </div>
         <div class="lg:col-span-4 bg-white rounded-2xl p-6 border border-slate-100">
-          <h3 class="font-display font-semibold text-sm text-cedine-orange uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
+          <h3 class="font-display font-semibold text-sm text-cedine-orange-dark uppercase tracking-wider mb-3" data-i18n="prog_benefits_label">Enfoque clave</h3>
           <ul class="space-y-2 text-sm text-slate-600">
             <li data-i18n="prog_3_b1">• Coordinación, equilibrio y tono muscular</li>
             <li data-i18n="prog_3_b2">• Integración sensorial en entornos abiertos</li>
@@ -152,7 +131,7 @@
       <p class="text-blue-100 text-sm sm:text-base mb-7 max-w-xl mx-auto" data-i18n="prog_cta_sub">
         Cada sesión transforma el día a día de una familia. Conoce cómo puedes patrocinar una terapia o vincular tu empresa.
       </p>
-      <a href="donar.html" class="inline-block bg-cedine-orange hover:brightness-105 text-white font-display font-semibold px-8 py-4 rounded-full shadow-md transition" data-i18n="hero_cta_primary">
+      <a href="donar.html" class="inline-block bg-cedine-orange-dark hover:bg-[#9E4700] text-white font-display font-semibold px-8 py-4 rounded-full shadow-md transition" data-i18n="hero_cta_primary">
         Quiero Apoyar
       </a>
     </div>

@@ -250,6 +250,22 @@
     else mostrarBanner();
   }
 
+  // ---------------------------------------------------------------------------
+  // Conversiones (Google Ad Grants): clics en Donar, WhatsApp, teléfono y correo.
+  // Solo se envían a Google si el visitante aceptó las cookies (Consent Mode).
+  // ---------------------------------------------------------------------------
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var evento = null;
+    if (/wa\.me\//.test(href)) evento = 'contacto_whatsapp';
+    else if (/^\/donar\/?$|fundacioncedine\.org\/donar/.test(href)) evento = 'clic_donar';
+    else if (/^tel:/.test(href)) evento = 'contacto_telefono';
+    else if (/^mailto:/.test(href)) evento = 'contacto_correo';
+    if (evento) gtag('event', evento, { ubicacion: location.pathname, texto: (a.textContent || '').trim().slice(0, 60) });
+  }, true);
+
   window.CedineCookies = { abrir: abrirPreferencias, estado: leer };
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar);

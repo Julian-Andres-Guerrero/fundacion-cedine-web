@@ -1,0 +1,40 @@
+/*
+ * Fundación CEDINE · Fuente de estilos Tailwind (v4)
+ * Para regenerar assets/css/tailwind.css después de cambiar clases en el HTML o JS:
+ *   npm run css
+ */
+@import "tailwindcss";
+
+@source "../../*.html";
+@source "../../admin/*.html";
+@source "../js/*.js";
+@source "../admin/*.js";
+
+@theme {
+  --color-cedine-blue: #1C4B7C;
+  --color-cedine-blue-dark: #143A61;
+  --color-cedine-green: #91BE66;
+  --color-cedine-green-dark: #3D6B1E;
+  --color-cedine-orange: #F79638;
+  --color-cedine-orange-dark: #B85400;
+  --color-cedine-cream: #FDFBF7;
+  /* Tonos accesibles (contraste WCAG AA ≥ 4.5:1) */
+  --color-cedine-orange-light: #FDBA74;  /* sobre azul */
+  --color-cedine-green-light: #B5DA8F;   /* sobre azul */
+  --color-cedine-orange-deep: #9E4700;   /* sobre fondos naranja suave */
+
+  --font-sans: Inter, Helvetica, Arial, sans-serif;
+  --font-display: Fredoka, sans-serif;
+  --font-playful: "Baloo 2", cursive;
+
+  /* Equivalencias con Tailwind 3 (el sitio se diseñó con la versión 3) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --blur-sm: 4px;
+  --radius-sm: 0.125rem;
+}
+
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-gray-200, currentColor); }
+  input::placeholder, textarea::placeholder { color: var(--color-gray-400); }
+  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+}

@@ -1,0 +1,63 @@
+/* Fundación CEDINE · Panel de administración (complementa Tailwind) */
+:root { --azul: #1C4B7C; --naranja: #B85400; --verde: #3D6B1E; }
+body { min-height: 100vh; }
+.franja { height: 5px; background: linear-gradient(90deg, #F79638 0 33.3%, #91BE66 33.3% 66.6%, #1C4B7C 66.6% 100%); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; font-family: Fredoka, Inter, sans-serif;
+  font-weight: 600; font-size: .9rem; border-radius: 999px; padding: .55rem 1.1rem; transition: filter .15s, background .15s; cursor: pointer;
+  border: 2px solid transparent; white-space: nowrap; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn:focus-visible, .input:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--naranja); outline-offset: 2px; }
+.btn-primario { background: var(--azul); color: #fff; }
+.btn-primario:hover:not(:disabled) { filter: brightness(1.15); }
+.btn-secundario { background: #fff; color: var(--azul); border-color: var(--azul); }
+.btn-secundario:hover:not(:disabled) { background: #eef3f9; }
+.btn-peligro { background: #fff; color: #b91c1c; border-color: #fca5a5; }
+.btn-peligro:hover:not(:disabled) { background: #fef2f2; }
+.btn-exito { background: var(--verde); color: #fff; }
+.btn-chico { padding: .3rem .7rem; font-size: .8rem; }
+.btn-icono { padding: .35rem .55rem; border-radius: .6rem; background: transparent; color: var(--azul); border: 1px solid #cbd5e1; }
+.btn-icono:hover { background: #eef3f9; }
+
+.input { width: 100%; border: 1.5px solid #cbd5e1; border-radius: .75rem; padding: .55rem .8rem; background: #fff; font-size: .95rem; }
+.input:focus { border-color: var(--azul); box-shadow: 0 0 0 3px rgba(28, 75, 124, .15); outline: none; }
+.input[readonly] { background: #f1f5f9; color: #475569; }
+.etiqueta { display: block; font-weight: 600; color: var(--azul); font-size: .85rem; margin-bottom: .3rem; }
+.ayuda { font-size: .75rem; color: #64748b; margin-top: .25rem; }
+.req::after { content: " *"; color: #b91c1c; }
+
+.tarjeta { background: #fff; border-radius: 1.25rem; box-shadow: 0 1px 2px rgba(15, 23, 42, .06); border: 1px solid #e2e8f0; }
+
+.tabla { width: 100%; border-collapse: separate; border-spacing: 0; font-size: .875rem; }
+.tabla th { text-align: left; font-weight: 600; color: #fff; background: var(--azul); padding: .6rem .75rem; position: sticky; top: 0; z-index: 1; }
+.tabla th:first-child { border-top-left-radius: .75rem; } .tabla th:last-child { border-top-right-radius: .75rem; }
+.tabla td { padding: .55rem .75rem; border-bottom: 1px solid #e2e8f0; vertical-align: top; background: #fff; }
+.tabla tr:hover td { background: #f8fafc; }
+.tabla tr.anulado td { color: #94a3b8; }
+.tabla tr.anulado td .tachar { text-decoration: line-through; }
+
+.chip { display: inline-flex; align-items: center; gap: .3rem; border-radius: 999px; padding: .1rem .6rem; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; }
+.chip-verde { background: #dcfce7; color: #166534; } .chip-rojo { background: #fee2e2; color: #991b1b; }
+.chip-azul { background: #dbeafe; color: #1e3a8a; } .chip-gris { background: #e2e8f0; color: #334155; }
+.chip-naranja { background: #ffedd5; color: #9a3412; }
+
+.nav-item { display: flex; align-items: center; gap: .7rem; padding: .6rem .9rem; border-radius: .8rem; color: #dbe6f3; font-weight: 500; }
+.nav-item:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+.nav-item.activo { background: #fff; color: var(--azul); font-weight: 700; }
+
+.modal-fondo { position: fixed; inset: 0; background: rgba(15, 23, 42, .55); display: flex; align-items: flex-start; justify-content: center; padding: 4vh 1rem; z-index: 60; overflow-y: auto; }
+.modal { background: #fff; border-radius: 1.25rem; width: 100%; max-width: 640px; border-top: 6px solid var(--azul); box-shadow: 0 25px 60px rgba(15, 23, 42, .35); }
+.modal.ancho { max-width: 1000px; }
+
+.toast { border-radius: .9rem; padding: .75rem 1rem; color: #fff; box-shadow: 0 10px 30px rgba(15, 23, 42, .25); font-size: .9rem; animation: entra .25s ease-out; }
+.toast-ok { background: var(--verde); } .toast-error { background: #b91c1c; } .toast-info { background: var(--azul); }
+@keyframes entra { from { transform: translateY(-8px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.cargando { display: inline-block; width: 1rem; height: 1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: gira .7s linear infinite; }
+@keyframes gira { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .toast, .cargando { animation: none; } }
+
+.formato-card { text-align: left; transition: transform .15s, box-shadow .15s; }
+.formato-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(28, 75, 124, .15); }
+iframe.vista-pdf { width: 100%; height: 75vh; border: 0; border-radius: .75rem; background: #e2e8f0; }
+.items-tabla input { min-width: 0; }

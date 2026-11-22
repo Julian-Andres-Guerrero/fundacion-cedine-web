@@ -17,30 +17,7 @@
   <!-- SwiperJS CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-            display: ['Fredoka', 'sans-serif'],
-            playful: ['Baloo 2', 'cursive'],
-          },
-          colors: {
-            cedine: {
-              blue: '#1C4B7C',
-              green: '#91BE66',
-              'green-dark': '#3D6B1E',
-              orange: '#F79638',
-              'orange-dark': '#B85400',
-              cream: '#FDFBF7',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1" />
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
@@ -73,7 +50,7 @@
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
     <div class="max-w-5xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/15 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="cases_tag">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/15 text-cedine-orange-light font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="cases_tag">
         Historias que Transforman Vidas • Bogotá, Colombia
       </span>
       <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-4" data-i18n="cases_title">
@@ -132,7 +109,7 @@
 
         <!-- Tarjeta Lateral de Impacto y Apoyo -->
         <div class="lg:col-span-4 bg-cedine-blue text-white rounded-3xl p-8 shadow-lg space-y-5">
-          <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider">
+          <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-cedine-orange-light font-display font-semibold text-xs uppercase tracking-wider">
             “Cuestión de actitud”
           </span>
           <h3 class="font-display font-bold text-2xl leading-snug">
@@ -236,6 +213,9 @@
     </div>
   </section>
 
+  <!-- Historias publicadas desde el panel de administración -->
+  <div id="historias-dinamicas"></div>
+
   <!-- ==================== LIGHTBOX AMPLIADO ==================== -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de fotografía" class="hidden fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-sm items-center justify-center p-4" onclick="closeLightbox()">
     <button type="button" aria-label="Cerrar vista ampliada" onclick="closeLightbox()" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white text-cedine-blue hover:bg-cedine-orange-dark hover:text-white font-bold text-xl flex items-center justify-center shadow-lg transition">
@@ -277,23 +257,24 @@
       }
     });
 
-    function openLightbox(src) {
+    window.openLightbox = function (src) {
       const lb = document.getElementById('lightbox');
       const img = document.getElementById('lightbox-img');
       img.src = src;
       lb.classList.remove('hidden');
       lb.classList.add('flex');
-    }
+    };
 
-    function closeLightbox() {
+    window.closeLightbox = function () {
       const lb = document.getElementById('lightbox');
       lb.classList.add('hidden');
       lb.classList.remove('flex');
-    }
+    };
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeLightbox();
     });
   </script>
+  <script src="assets/js/historias.js?v=1"></script>
 </body>
 </html>

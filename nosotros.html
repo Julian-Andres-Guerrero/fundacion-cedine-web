@@ -13,30 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-            display: ['Fredoka', 'sans-serif'],
-            playful: ['Baloo 2', 'cursive'],
-          },
-          colors: {
-            cedine: {
-              blue: '#1C4B7C',
-              green: '#91BE66',
-              'green-dark': '#3D6B1E',
-              orange: '#F79638',
-              'orange-dark': '#B85400',
-              cream: '#FDFBF7',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1" />
 
   <!-- Librería jsPDF para generar el PDF oficial sobre la plantilla institucional -->
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -51,7 +28,7 @@
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-14 px-6 bg-cedine-blue text-white">
     <div class="max-w-4xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/15 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="ver_tag">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/15 text-cedine-orange-light font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="ver_tag">
         Portal de Transparencia Académica • ISO 15489 / Ley 1581
       </span>
       <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-4" data-i18n="ver_title">

@@ -13,28 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'Helvetica', 'Arial', 'sans-serif'],
-            display: ['Fredoka', 'sans-serif'],
-            playful: ['Baloo 2', 'cursive'],
-          },
-          colors: {
-            cedine: {
-              blue: '#1C4B7C',
-              green: '#91BE66',
-              orange: '#F79638',
-              cream: '#FDFBF7',
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="/assets/css/tailwind.css?v=1" />
 
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/custom.css" />
@@ -46,7 +25,7 @@
   <!-- ==================== CABECERA ==================== -->
   <section class="pt-36 pb-16 px-6 bg-cedine-blue text-white">
     <div class="max-w-5xl mx-auto text-center">
-      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-orange font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="form_tag">
+      <span data-aos="fade-down" class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cedine-orange-light font-display font-semibold text-xs uppercase tracking-wider mb-4" data-i18n="form_tag">
         Más sobre CEDINE • Capacitación y Empleabilidad
       </span>
       <h1 data-aos="fade-up" class="font-display font-bold text-3xl sm:text-5xl leading-tight mb-5" data-i18n="form_title">
@@ -65,7 +44,7 @@
       <!-- Destacado: Valoración de Habilidades -->
       <div data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-8 sm:p-10 border-l-8 border-cedine-orange shadow-sm mb-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div>
-          <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange text-xs font-display font-bold uppercase mb-2" data-i18n="form_offer_badge">Ofrecemos</span>
+          <span class="inline-block px-3 py-1 rounded-full bg-cedine-orange/15 text-cedine-orange-deep text-xs font-display font-bold uppercase mb-2" data-i18n="form_offer_badge">Ofrecemos</span>
           <h2 class="font-display font-bold text-2xl sm:text-3xl text-cedine-blue mb-2" data-i18n="form_eval_title">
             Valoración de Habilidades para el Trabajo
           </h2>
@@ -96,19 +75,19 @@
         </div>
 
         <div data-aos="fade-up" data-aos-delay="50" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue font-display font-bold flex items-center justify-center mb-4">02</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue-dark font-display font-bold flex items-center justify-center mb-4">02</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_2">Manejo Defensivo / Preventivo</h4>
           <p class="text-xs text-slate-600" data-i18n="c_2_d">Técnicas de conducción segura, anticipación de riesgos y prevención de siniestros.</p>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="100" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-orange text-white font-display font-bold flex items-center justify-center mb-4">03</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-orange-dark text-white font-display font-bold flex items-center justify-center mb-4">03</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_3">Primeros Auxilios</h4>
           <p class="text-xs text-slate-600" data-i18n="c_3_d">Atención inmediata prehospitalaria, valoración inicial y protocolos de emergencia.</p>
         </div>
 
         <div data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-orange text-white font-display font-bold flex items-center justify-center mb-4">04</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-orange-dark text-white font-display font-bold flex items-center justify-center mb-4">04</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_4">Manejo de Extintores y Control de Incendios</h4>
           <p class="text-xs text-slate-600" data-i18n="c_4_d">Clasificación de fuego, uso adecuado de extintores y respuesta ante conatos.</p>
         </div>
@@ -120,19 +99,19 @@
         </div>
 
         <div data-aos="fade-up" data-aos-delay="100" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue font-display font-bold flex items-center justify-center mb-4">06</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue-dark font-display font-bold flex items-center justify-center mb-4">06</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_6">Seguridad Industrial</h4>
           <p class="text-xs text-slate-600" data-i18n="c_6_d">Uso de elementos de protección personal (EPP) y prevención de riesgos laborales.</p>
         </div>
 
         <div data-aos="fade-up" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue font-display font-bold flex items-center justify-center mb-4">07</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-green text-cedine-blue-dark font-display font-bold flex items-center justify-center mb-4">07</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_7">Básico en Alturas</h4>
           <p class="text-xs text-slate-600" data-i18n="c_7_d">Fundamentos de seguridad, inspección de equipos y protección contra caídas.</p>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="50" class="bg-cedine-cream rounded-3xl p-6 border border-slate-100 hover:shadow-md transition">
-          <span class="w-10 h-10 rounded-2xl bg-cedine-orange text-white font-display font-bold flex items-center justify-center mb-4">08</span>
+          <span class="w-10 h-10 rounded-2xl bg-cedine-orange-dark text-white font-display font-bold flex items-center justify-center mb-4">08</span>
           <h4 class="font-display font-bold text-lg text-cedine-blue mb-1" data-i18n="c_8">Alistamiento Vehicular</h4>
           <p class="text-xs text-slate-600" data-i18n="c_8_d">Inspección preoperacional diaria, fluidos, frenos, luces y seguridad activa.</p>
         </div>
@@ -148,7 +127,7 @@
       <div class="mt-14 bg-cedine-blue text-white rounded-3xl p-8 sm:p-10 text-center shadow-lg">
         <h3 class="font-display font-bold text-2xl mb-2" data-i18n="form_cta_t">¿Deseas inscribirte o solicitar capacitación para tu equipo?</h3>
         <p class="text-blue-100 text-sm mb-6" data-i18n="form_cta_s">Contáctanos directamente para conocer fechas, modalidades y requisitos.</p>
-        <a href="https://wa.me/573125182773?text=Hola%20Fundaci%C3%B3n%20CEDINE,%20solicito%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20Formaci%C3%B3n%20para%20el%20Trabajo." target="_blank" rel="noopener" class="inline-block bg-cedine-orange hover:brightness-105 text-white font-display font-semibold px-8 py-3.5 rounded-full shadow-md transition" data-i18n="form_cta_b">
+        <a href="https://wa.me/573125182773?text=Hola%20Fundaci%C3%B3n%20CEDINE,%20solicito%20informaci%C3%B3n%20sobre%20los%20cursos%20de%20Formaci%C3%B3n%20para%20el%20Trabajo." target="_blank" rel="noopener" class="inline-block bg-cedine-orange-dark hover:bg-[#9E4700] text-white font-display font-semibold px-8 py-3.5 rounded-full shadow-md transition" data-i18n="form_cta_b">
           Consultar por WhatsApp (+57 312 5182773)
         </a>
       </div>
