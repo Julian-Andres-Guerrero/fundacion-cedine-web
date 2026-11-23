@@ -3,7 +3,10 @@
  * Para regenerar assets/css/tailwind.css después de cambiar clases en el HTML o JS:
  *   npm run css
  */
-@import "tailwindcss";
+/* Sin capas (@layer): así las utilidades tienen prioridad sobre Swiper, AOS y custom.css,
+   igual que cuando se usaba el CDN de Tailwind. El enlace va al final del <head>. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css";
 
 @source "../../*.html";
 @source "../../admin/*.html";
@@ -33,8 +36,9 @@
   --radius-sm: 0.125rem;
 }
 
-@layer base {
-  *, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-gray-200, currentColor); }
-  input::placeholder, textarea::placeholder { color: var(--color-gray-400); }
-  button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
-}
+/* Ajustes de compatibilidad con Tailwind 3 */
+*, ::after, ::before, ::backdrop, ::file-selector-button { border-color: var(--color-gray-200, currentColor); }
+input::placeholder, textarea::placeholder { color: var(--color-gray-400); }
+button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
+
+@import "tailwindcss/utilities.css";

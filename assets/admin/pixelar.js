@@ -135,7 +135,8 @@
       var original;
       try { original = await cargarImagen(file); } catch (e) { alert(e.message); return resolve(null); }
       var W = original.width, H = original.height;
-      var zonas = [], intensidad = 10;
+      var zonas = (opciones.zonas || []).map(function (z) { return { x: z.x, y: z.y, w: z.w, h: z.h }; });
+      var intensidad = opciones.intensidad || 10;
 
       var fondo = document.createElement('div');
       fondo.className = 'modal-fondo';
@@ -146,7 +147,7 @@
         '<div class="relative bg-slate-900 rounded-xl overflow-hidden flex justify-center"><canvas id="px-lienzo" class="max-w-full max-h-[62vh] cursor-crosshair touch-none" style="image-rendering:auto"></canvas></div>' +
         '<div class="flex flex-wrap items-center gap-3 mt-3 text-sm">' +
         '<span class="text-slate-600">✋ Arrastra sobre la foto para pixelar otra zona · toca una zona para quitarla</span>' +
-        '<label class="flex items-center gap-2 ml-auto">Intensidad <input type="range" id="px-int" min="5" max="20" value="10"></label></div>' +
+        '<label class="flex items-center gap-2 ml-auto">Intensidad <input type="range" id="px-int" min="5" max="20" value="' + intensidad + '"></label></div>' +
         '<div class="flex flex-wrap justify-between gap-2 mt-4 pt-4 border-t">' +
         '<div class="flex gap-2"><button type="button" class="btn btn-secundario btn-chico" data-px="detectar">🔍 Detectar de nuevo</button>' +
         '<button type="button" class="btn btn-secundario btn-chico" data-px="limpiar">Quitar todas</button></div>' +
@@ -234,7 +235,7 @@
           dibujar(true);
           var blob = await new Promise(function (r) { lienzo.toBlob(r, 'image/webp', 0.82); });
           if (!blob || blob.type !== 'image/webp') blob = await new Promise(function (r) { lienzo.toBlob(r, 'image/jpeg', 0.85); });
-          cerrar({ blob: blob, ancho: W, alto: H, caras: zonas.length });
+          cerrar({ blob: blob, ancho: W, alto: H, caras: zonas.length, zonas: zonas.slice(), intensidad: intensidad });
         }
       });
       document.addEventListener('keydown', function tecla(e) {
@@ -242,9 +243,39 @@
       });
 
       dibujar();
-      if (opciones.detectar === false) aviso(); else detectar();
+      if (opciones.zonas || opciones.detectar === false) aviso(); else detectar();
     });
   }
 
-  window.CedinePixelar = { editar: editar, precargar: function () { return cargarDetector().catch(function () {}); }, _detectarCaras: detectarCaras };
+  async function aBlob(lienzo) {
+    var blob = await new Promise(function (r) { lienzo.toBlob(r, 'image/webp', 0.82); });
+    if (!blob || blob.type !== 'image/webp') blob = await new Promise(function (r) { lienzo.toBlob(r, 'image/jpeg', 0.85); });
+    return blob;
+  }
+
+  // Cargue masivo: detecta y pixela sin abrir el editor.
+  // Devuelve {blob, miniatura, ancho, alto, caras, zonas, intensidad, detecto}
+  async function procesar(file, opciones) {
+    opciones = opciones || {};
+    var original = await cargarImagen(file);
+    var W = original.width, H = original.height, zonas = [], detecto = true;
+    var intensidad = opciones.intensidad || 10;
+    try {
+      var r = await detectarCaras(original);
+      zonas = r.cajas.map(function (c) { return ampliar(c, W, H); });
+    } catch (e) { detecto = false; }
+    var ctx = original.getContext('2d');
+    var copia = document.createElement('canvas'); copia.width = W; copia.height = H;
+    copia.getContext('2d').drawImage(original, 0, 0);
+    zonas.forEach(function (z) { pixelar(ctx, copia, z, intensidad); });
+    var blob = await aBlob(original);
+    var k = Math.min(1, 360 / Math.max(W, H));
+    var mini = document.createElement('canvas'); mini.width = Math.round(W * k); mini.height = Math.round(H * k);
+    mini.getContext('2d').drawImage(original, 0, 0, mini.width, mini.height);
+    var miniatura = await new Promise(function (r) { mini.toBlob(r, 'image/jpeg', 0.8); });
+    original.width = original.height = copia.width = copia.height = 0; // liberar memoria
+    return { blob: blob, miniatura: miniatura, ancho: W, alto: H, caras: zonas.length, zonas: zonas, intensidad: intensidad, detecto: detecto };
+  }
+
+  window.CedinePixelar = { editar: editar, procesar: procesar, precargar: function () { return cargarDetector().catch(function () {}); }, _detectarCaras: detectarCaras };
 })();

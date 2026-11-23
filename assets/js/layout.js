@@ -99,7 +99,7 @@
               <a href="/donar" class="btn-apoyar ${currentPage === 'donar' ? 'ring-4 ring-[#B85400]/25' : ''}">${ico(I.heart, 'w-5 h-5')}<span data-i18n="nav_donate">Apoyar Ahora</span></a>
             </div>
             <div class="flex items-center gap-2 xl:hidden">
-              <a href="/donar" class="btn-apoyar !px-4 !py-2 text-sm" data-i18n="nav_donate">Apoyar Ahora</a>
+              <a href="/donar" class="btn-apoyar !px-3.5 !py-2 text-sm whitespace-nowrap" data-i18n="nav_donate">Apoyar Ahora</a>
               <button id="menu-movil-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil" class="grid place-items-center w-11 h-11 rounded-2xl text-cedine-blue bg-[#1C4B7C]/10 hover:bg-[#1C4B7C]/15">${ico(I.menu, 'w-6 h-6')}</button>
             </div>
           </div>

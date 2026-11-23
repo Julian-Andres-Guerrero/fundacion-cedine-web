@@ -65,13 +65,16 @@
 
   A.VISTAS.galeria = async function (c) {
     c.innerHTML = A.encabezado('Galería y videos', 'Lo que publiques aquí aparece en <a class="underline" href="/galeria" target="_blank" rel="noopener">/galeria</a>. Las fotos se pixelan en tu computador antes de subirse.',
-      '<label class="btn btn-primario cursor-pointer">📷 Subir fotos<input type="file" id="g-fotos" accept="image/jpeg,image/png,image/webp,image/heic" multiple class="sr-only"></label>' +
+      '<label class="btn btn-primario cursor-pointer">📷 Cargue masivo de fotos<input type="file" id="g-fotos" accept="image/jpeg,image/png,image/webp,image/heic" multiple class="sr-only"></label>' +
+      '<label class="btn btn-secundario cursor-pointer">📁 Subir una carpeta<input type="file" id="g-carpeta" webkitdirectory multiple class="sr-only"></label>' +
       '<button class="btn btn-secundario" id="g-video">▶️ Agregar video de YouTube</button>') +
       '<div class="tarjeta p-4 mb-4 text-sm bg-amber-50 border-amber-200">🛡️ <strong>Antes de publicar:</strong> toda persona reconocible debe tener la autorización <strong>AUT-001</strong> firmada. ' +
       'Si no la tiene —en especial niños y niñas— su cara debe quedar pixelada. El editor detecta las caras automáticamente; revisa siempre el resultado.</div>' +
       '<div class="flex gap-2 mb-4" role="tablist"><button class="btn btn-chico" data-gpest="foto" role="tab">📷 Fotos</button><button class="btn btn-chico" data-gpest="video" role="tab">▶️ Videos</button></div>' +
       '<div id="g-lista" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>';
-    $('#g-fotos').addEventListener('change', function () { var f = Array.prototype.slice.call(this.files); this.value = ''; subirFotos(f, c); });
+    ['#g-fotos', '#g-carpeta'].forEach(function (sel) {
+      $(sel).addEventListener('change', function () { var f = Array.prototype.slice.call(this.files); this.value = ''; subirFotos(f, c); });
+    });
     $('#g-video').addEventListener('click', function () { formVideo(null, c); });
     $$('[data-gpest]', c).forEach(function (b) { b.addEventListener('click', function () { pestanaGal = b.dataset.gpest; listar(c); }); });
     if (window.CedinePixelar) window.CedinePixelar.precargar();
@@ -139,17 +142,33 @@
     });
   }
 
+  // ---------------------------------------------------------------------------
+  // CARGUE MASIVO: elegir muchas fotos (o una carpeta) → pixelado automático de
+  // todas → cuadrícula de revisión (ajustar / quitar) → subida en paralelo.
+  // ---------------------------------------------------------------------------
+  var MAX_FOTOS = 150, MAX_MB = 25;
+
+  function esImagen(f) { return /^image\//.test(f.type) || /\.(jpe?g|png|webp|heic|heif)$/i.test(f.name); }
+
   async function subirFotos(archivos, c) {
-    if (!archivos.length) return;
+    var todas = archivos.filter(esImagen);
+    var grandes = todas.filter(function (f) { return f.size > MAX_MB * 1048576; });
+    todas = todas.filter(function (f) { return f.size <= MAX_MB * 1048576; })
+      .sort(function (x, y) { return (x.webkitRelativePath || x.name).localeCompare(y.webkitRelativePath || y.name, 'es', { numeric: true }); });
+    if (grandes.length) A.toast(grandes.length + ' archivo(s) de más de ' + MAX_MB + ' MB se omitieron.', 'error');
+    if (!todas.length) return A.toast('No se encontraron fotos (JPG, PNG, WEBP o HEIC).', 'error');
+    if (todas.length > MAX_FOTOS) { A.toast('Máximo ' + MAX_FOTOS + ' fotos por cargue. Se tomarán las primeras ' + MAX_FOTOS + '.', 'error'); todas = todas.slice(0, MAX_FOTOS); }
     if (!window.CedinePixelar) return A.toast('El editor de fotos no cargó. Recarga la página.', 'error');
+
+    var carpeta = (todas[0].webkitRelativePath || '').split('/')[0] || '';
     var datos = await new Promise(function (resolve) {
-      var md = A.modal('Datos de las ' + archivos.length + ' foto(s)', '<form id="f-lote" class="grid gap-4">' +
-        '<div><label class="etiqueta req" for="fl-album">Jornada o álbum</label><input id="fl-album" class="input" maxlength="80" placeholder="Ej.: Jornada Un Día para Soñar 2026"></div>' +
+      var md = A.modal('Cargue masivo: ' + todas.length + ' foto(s)', '<form id="f-lote" class="grid gap-4">' +
+        '<div><label class="etiqueta req" for="fl-album">Jornada o álbum</label><input id="fl-album" class="input" maxlength="80" value="' + esc(carpeta) + '" placeholder="Ej.: Jornada Un Día para Soñar 2026"></div>' +
         '<div><label class="etiqueta" for="fl-titulo">Descripción (se aplica a todas; luego puedes editar cada una)</label><input id="fl-titulo" class="input" maxlength="140"></div>' +
         '<div><label class="etiqueta" for="fl-aut">Autorizaciones AUT-001 de las personas que se ven sin pixelar</label><input id="fl-aut" class="input" maxlength="300" placeholder="Ej.: AUT-001-2026-0003, AUT-001-2026-0004"></div>' +
-        '<label class="flex items-start gap-2 text-sm"><input type="checkbox" id="fl-pub" class="mt-1" checked> Publicar de inmediato en la galería</label>' +
-        '<p class="text-sm text-slate-600">A continuación se abrirá cada foto en el editor para revisar el pixelado de caras.</p>' +
-        '<div class="flex justify-end gap-2"><button type="button" class="btn btn-secundario" data-cerrar>Cancelar</button><button class="btn btn-primario">Continuar</button></div></form>',
+        '<label class="flex items-start gap-2 text-sm"><input type="checkbox" id="fl-pub" class="mt-1"> Publicar de inmediato en la galería (si no, quedan como borrador)</label>' +
+        '<p class="text-sm text-slate-600">El sistema pixelará las caras de todas las fotos automáticamente. Después verás una cuadrícula para revisarlas, ajustar las que necesites y quitar las que no quieras subir.</p>' +
+        '<div class="flex justify-end gap-2"><button type="button" class="btn btn-secundario" data-cerrar>Cancelar</button><button class="btn btn-primario">Procesar fotos</button></div></form>',
         { alCerrar: function () { resolve(null); } });
       $('#f-lote', md.el).addEventListener('submit', function (e) {
         e.preventDefault();
@@ -160,22 +179,155 @@
       });
     });
     if (!datos) return;
-    var ok = 0;
-    for (var i = 0; i < archivos.length; i++) {
-      var res = await window.CedinePixelar.editar(archivos[i], { titulo: 'Foto ' + (i + 1) + ' de ' + archivos.length + ' — proteger caras' });
-      if (!res) continue;
-      try {
-        var path = await subirImagen(res.blob, 'galeria');
-        var r = await sb.from('medios').insert({
-          tipo: 'foto', titulo: datos.titulo || datos.album, album: datos.album, storage_path: path, ancho: res.ancho, alto: res.alto,
-          formato: res.alto > res.ancho ? 'vertical' : 'horizontal', caras_pixeladas: res.caras > 0, autorizacion: datos.aut || null, publicado: datos.pub
-        });
-        if (r.error) throw r.error;
-        ok++;
-      } catch (e) { A.toast(A.errorTexto(e), 'error'); }
-    }
-    if (ok) A.toast(ok + ' foto(s) subida(s).', 'ok');
-    pestanaGal = 'foto'; listar(c);
+    await revisarLote(todas, datos, c);
+  }
+
+  function revisarLote(archivos, datos, c) {
+    return new Promise(function (fin) {
+      var items = archivos.map(function (f, i) { return { i: i, file: f, estado: 'pendiente', res: null, url: '', quitada: false }; });
+      var cancelado = false, subiendo = false;
+
+      var fondo = document.createElement('div');
+      fondo.className = 'modal-fondo';
+      fondo.innerHTML = '<div class="modal ancho" role="dialog" aria-modal="true" aria-labelledby="lote-titulo">' +
+        '<div class="flex items-center justify-between px-6 pt-5 pb-3"><h2 id="lote-titulo" class="font-display font-bold text-xl text-cedine-blue">Revisar ' + items.length + ' foto(s) — ' + esc(datos.album) + '</h2>' +
+        '<button type="button" class="btn-icono" data-l="cancelar" aria-label="Cerrar">✕</button></div><div class="px-6 pb-6">' +
+        '<div class="lote-barra mb-2"><div id="l-barra" style="width:0%"></div></div>' +
+        '<p class="text-sm text-slate-600 mb-3" id="l-estado"><span class="cargando"></span> Preparando el detector de caras...</p>' +
+        '<div class="flex flex-wrap gap-2 text-xs mb-3" id="l-filtros"></div>' +
+        '<div id="l-grilla" class="lote-grilla"></div>' +
+        '<div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-4 border-t">' +
+        '<label class="flex items-start gap-2 text-sm max-w-xl"><input type="checkbox" id="l-ok" class="mt-1"> Revisé todas las fotos: no queda ninguna cara de niño, niña o persona sin autorización AUT-001 sin pixelar.</label>' +
+        '<div class="flex gap-2"><button type="button" class="btn btn-secundario" data-l="cancelar">Cancelar</button>' +
+        '<button type="button" class="btn btn-primario" data-l="subir" disabled>Subir fotos</button></div></div></div></div>';
+      document.body.appendChild(fondo);
+
+      var grilla = $('#l-grilla', fondo), estado = $('#l-estado', fondo), barra = $('#l-barra', fondo), bSubir = fondo.querySelector('[data-l="subir"]'), chk = $('#l-ok', fondo);
+
+      function activas() { return items.filter(function (x) { return !x.quitada && x.estado === 'listo'; }); }
+      function sinCaras() { return activas().filter(function (x) { return x.res.caras === 0; }); }
+      function tarjeta(x) {
+        var aviso = x.estado === 'error' ? '<span class="lote-chip rojo">⚠️ No se pudo leer</span>'
+          : x.estado !== 'listo' ? '<span class="lote-chip"><span class="cargando"></span> Procesando</span>'
+          : !x.res.detecto ? '<span class="lote-chip ambar">✋ Revisar a mano</span>'
+          : x.res.caras ? '<span class="lote-chip verde">🛡️ ' + x.res.caras + ' cara(s) pixelada(s)</span>'
+          : '<span class="lote-chip ambar">⚠️ Sin caras detectadas</span>';
+        return '<figure class="lote-item' + (x.quitada ? ' quitada' : '') + '" data-i="' + x.i + '">' +
+          (x.url ? '<img src="' + x.url + '" alt="">' : '<div class="lote-vacio"></div>') +
+          '<figcaption><span class="truncate" title="' + esc(x.file.name) + '">' + esc(x.file.name) + '</span>' + aviso + '</figcaption>' +
+          (x.estado === 'listo' ? '<div class="lote-acciones">' +
+            (x.quitada ? '<button type="button" class="btn btn-secundario btn-chico" data-l="volver" data-i="' + x.i + '">↩️ Incluir</button>'
+              : '<button type="button" class="btn btn-secundario btn-chico" data-l="ajustar" data-i="' + x.i + '">✏️ Ajustar</button>' +
+                '<button type="button" class="btn btn-secundario btn-chico" data-l="quitar" data-i="' + x.i + '" aria-label="No subir esta foto">🗑️</button>') + '</div>' : '') +
+          '</figure>';
+      }
+      function pintarUna(x) {
+        var el = grilla.querySelector('[data-i="' + x.i + '"]');
+        if (el) el.outerHTML = tarjeta(x); else grilla.insertAdjacentHTML('beforeend', tarjeta(x));
+      }
+      function resumen() {
+        var hechas = items.filter(function (x) { return x.estado !== 'pendiente'; }).length;
+        barra.style.width = Math.round(hechas * 100 / items.length) + '%';
+        var act = activas(), sc = sinCaras(), caras = act.reduce(function (t, x) { return t + x.res.caras; }, 0);
+        if (subiendo) return;
+        if (hechas < items.length) estado.innerHTML = '<span class="cargando"></span> Pixelando caras: ' + hechas + ' de ' + items.length + '... (no cierres esta ventana)';
+        else estado.innerHTML = '✅ Listas <strong>' + act.length + '</strong> foto(s) con <strong>' + caras + '</strong> cara(s) pixelada(s).' +
+          (act.some(function (x) { return !x.res.detecto; }) ? ' <strong class="text-amber-700">La detección automática no está disponible en este navegador: abre cada foto con ✏️ Ajustar y pixela las caras a mano.</strong>'
+            : sc.length ? ' <strong class="text-amber-700">' + sc.length + ' foto(s) sin caras detectadas: ábrelas con ✏️ Ajustar y confirma.</strong>' : '') +
+          ' Toca ✏️ para corregir una foto o 🗑️ para no subirla.';
+        bSubir.disabled = !(hechas === items.length && act.length && chk.checked);
+        bSubir.textContent = 'Subir ' + act.length + ' foto(s)';
+      }
+      chk.addEventListener('change', resumen);
+
+      function cerrar() {
+        cancelado = true;
+        items.forEach(function (x) { if (x.url) URL.revokeObjectURL(x.url); });
+        fondo.remove(); fin();
+      }
+
+      fondo.addEventListener('click', async function (e) {
+        var b = e.target.closest('[data-l]'); if (!b || subiendo) return;
+        var a = b.dataset.l, x = items[+b.dataset.i];
+        if (a === 'cancelar') {
+          if (activas().length && !(await A.confirmar('¿Cancelar el cargue?', '<p>Las fotos procesadas no se subirán.</p>', 'Sí, cancelar'))) return;
+          cerrar();
+        } else if (a === 'quitar') { x.quitada = true; pintarUna(x); resumen(); }
+        else if (a === 'volver') { x.quitada = false; pintarUna(x); resumen(); }
+        else if (a === 'ajustar') {
+          var r = await window.CedinePixelar.editar(x.file, { titulo: x.file.name + ' — ajustar pixelado', zonas: x.res.zonas, intensidad: x.res.intensidad });
+          if (!r) return;
+          var mini = await miniatura(r.blob);
+          if (x.url) URL.revokeObjectURL(x.url);
+          x.res = { blob: r.blob, ancho: r.ancho, alto: r.alto, caras: r.caras, zonas: r.zonas, intensidad: r.intensidad, detecto: true };
+          x.url = URL.createObjectURL(mini); x.revisada = true;
+          pintarUna(x); resumen();
+        } else if (a === 'subir') subir();
+      });
+
+      async function subir() {
+        var lista = activas();
+        if (!lista.length || !chk.checked) return;
+        subiendo = true; bSubir.disabled = true; chk.disabled = true;
+        fondo.querySelectorAll('[data-l="ajustar"],[data-l="quitar"],[data-l="cancelar"]').forEach(function (z) { z.disabled = true; });
+        var ok = 0, fallos = 0, n = 0, base = Date.now();
+        async function una(x, k) {
+          try {
+            var path = await subirImagen(x.res.blob, 'galeria');
+            var r = await sb.from('medios').insert({
+              tipo: 'foto', titulo: datos.titulo || datos.album, album: datos.album, storage_path: path, ancho: x.res.ancho, alto: x.res.alto,
+              formato: x.res.alto > x.res.ancho ? 'vertical' : 'horizontal', caras_pixeladas: x.res.caras > 0,
+              autorizacion: datos.aut || null, publicado: datos.pub, orden: k
+            });
+            if (r.error) { await sb.storage.from('galeria').remove([path]); throw r.error; }
+            ok++; x.subida = true;
+            var el = grilla.querySelector('[data-i="' + x.i + '"] figcaption'); if (el) el.insertAdjacentHTML('beforeend', '<span class="lote-chip verde">☁️ Subida</span>');
+          } catch (e) {
+            fallos++; console.warn(e);
+            var el2 = grilla.querySelector('[data-i="' + x.i + '"] figcaption'); if (el2) el2.insertAdjacentHTML('beforeend', '<span class="lote-chip rojo">❌ ' + esc(A.errorTexto(e)) + '</span>');
+          }
+          n++;
+          barra.style.width = Math.round(n * 100 / lista.length) + '%';
+          estado.innerHTML = '<span class="cargando"></span> Subiendo ' + n + ' de ' + lista.length + '...';
+        }
+        barra.style.width = '0%';
+        var cola = lista.map(function (x, k) { return [x, k]; });
+        async function trabajador() { while (cola.length) { var t = cola.shift(); await una(t[0], t[1]); } }
+        await Promise.all([trabajador(), trabajador(), trabajador()]);
+        subiendo = false;
+        estado.innerHTML = (fallos ? '⚠️ ' : '✅ ') + '<strong>' + ok + '</strong> foto(s) subida(s)' + (fallos ? ', <strong class="text-red-700">' + fallos + ' con error</strong> (puedes intentarlas de nuevo en otro cargue)' : '') +
+          (datos.pub ? ' y publicadas en la galería.' : ' como borrador: actívalas con el interruptor «Publicada».') + ' Tardó ' + Math.round((Date.now() - base) / 1000) + ' s.';
+        bSubir.outerHTML = '<button type="button" class="btn btn-primario" id="l-fin">Terminar</button>';
+        fondo.querySelector('[data-l="cancelar"].btn').remove();
+        $('#l-fin', fondo).addEventListener('click', function () { cerrar(); pestanaGal = 'foto'; listar(c); });
+        A.toast(ok + ' foto(s) subida(s).', fallos ? 'error' : 'ok');
+      }
+
+      async function miniatura(blob) {
+        var bmp = await createImageBitmap(blob);
+        var k = Math.min(1, 360 / Math.max(bmp.width, bmp.height));
+        var cv = document.createElement('canvas'); cv.width = Math.round(bmp.width * k); cv.height = Math.round(bmp.height * k);
+        cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
+        return new Promise(function (r) { cv.toBlob(r, 'image/jpeg', 0.8); });
+      }
+
+      grilla.innerHTML = items.map(tarjeta).join('');
+      resumen();
+      (async function () {
+        await window.CedinePixelar.precargar();
+        for (var k = 0; k < items.length; k++) {
+          if (cancelado) return;
+          var x = items[k];
+          try {
+            x.res = await window.CedinePixelar.procesar(x.file);
+            x.url = URL.createObjectURL(x.res.miniatura); x.res.miniatura = null;
+            x.estado = 'listo';
+          } catch (e) { console.warn(x.file.name, e); x.estado = 'error'; }
+          if (cancelado) return;
+          pintarUna(x); resumen();
+        }
+      })();
+    });
   }
 
   function formVideo(m, c) {
